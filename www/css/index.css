@@ -1,0 +1,144 @@
+/* this makes the nav bar a bit higher than default */
+.myNavBar .ui-btn .ui-btn-inner {
+    padding-top: 35px !important;
+}
+
+/* and this makes the space for the icons a bit bigger */
+.myNavBar .ui-btn .ui-icon {
+    width: 35px !important;
+    height: 35px !important;
+    margin-left: -20px !important;
+    margin-top: -5px;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+.myNavBar span.ui-btn-inner {
+    margin-bottom: -7px;
+}
+
+.custom-calendar .ui-icon {
+    background: url(images/83-calendar.png) 50% 50% no-repeat;
+    background-size: 32px 32px;
+}
+
+.custom-report .ui-icon {
+    background: url(images/137-presentation.png) 50% 50% no-repeat;
+    background-size: 32px 32px;
+}
+
+.custom-settings .ui-icon {
+    background: url(images/20-gear2.png) 50% 50% no-repeat;
+    background-size: 32px 32px;
+}
+
+.ui-input-text {
+    border: none !important;
+    box-shadow: none !important;
+    text-align: right !important;
+    background-color: rgba(0, 0, 0, 0) !important;
+    font-weight: normal;
+    font-size: 16px !important;
+    color: blue;
+}
+
+.ui-input-listview {
+    margin-top: -10px !important;
+    margin-bottom: 0px !important;
+    margin-right: 0px !important; /* If you want to fix right as well */
+    margin-left: -5px !important; /* If you want to fix right as well */
+    width: 100px !important;
+}
+
+/* remove rounded corners */
+.ui-btn-corner-all {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.myCheckRadio .ui-radio-on .ui-icon,
+.myCheckRadio .ui-checkbox-on .ui-icon {
+    background: url(images/check.png) 50% 50% no-repeat;
+    background-size: 16px 16px;
+    width: 32px !important;
+    height: 32px !important;
+    margin-top: -15px !important;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+.myCheckRadio .ui-icon-radio-off,
+.myCheckRadio .ui-icon-checkbox-off {
+    background-image: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* right arrow icon */
+.ui-icon-nf-arrow-r {
+    background-image: url(images/nf-arrow-r.png);
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* plus icon */
+.ui-icon-nf-plus {
+    background-image: url(images/nf-plus.png) 50% 50% no-repeat;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    background-color: rgba(0, 0, 0, 0);
+    margin: 3px 1px 2px 6px !important;
+}
+
+a[data-icon="nf-plus"] {
+    width: 32px;
+}
+
+a[data-icon="nf-plus"] .ui-btn-inner {
+    height: 30px;
+}
+
+/* removing the shadow on input elements */
+.ui-focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.text {
+    padding-left: 5px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+    color: #858585;
+}
+
+
+
+
+
+
+
+  
+        
