@@ -7,6 +7,8 @@
     <author email="manuel.dequeker@me.com" href="http://phonegap.com">
         Manuel DEQUEKER
     </author>
+    <plugin name="Device" value="org.apache.cordova.Device"/>
+    <plugin name="Storage" value="org.apache.cordova.Storage" />
     <feature name="http://api.phonegap.com/1.0/device" />
 	<feature name="http://api.phonegap.com/1.0/file"/>
     <preference name="permissions" value="none" />
