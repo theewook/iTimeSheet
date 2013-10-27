@@ -30,7 +30,7 @@
 <div class="app">
     <h1>Apache Cordova MDE</h1>
 </div>
-<script type="text/javascript" src="js/cordova-2.5.0.js"></script>
+<script type="text/javascript" src="js/cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" charset="utf-8">
 
@@ -78,8 +78,8 @@
     // Cordova is ready
     //
     function onDeviceReady() {
-        var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
         alert('onDeviceReady');
+        var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
         db.transaction(populateDB, errorCB, successCB);
     }
 
