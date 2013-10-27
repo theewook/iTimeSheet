@@ -11,6 +11,7 @@
     <plugin name="Storage" value="org.apache.cordova.Storage" />
     <feature name="http://api.phonegap.com/1.0/device" />
 	<feature name="http://api.phonegap.com/1.0/file"/>
+	<gap:plugin name="org.apache.cordova.file" />
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
