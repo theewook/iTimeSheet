@@ -16,8 +16,6 @@
         Manuel DEQUEKER
     </author>
 
-    <gap:plugin name="org.apache.cordova.file" />
-
     <!--
         Enable individual API permissions here.
         The "device" permission is required for the 'deviceready' event.
