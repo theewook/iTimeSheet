@@ -15,8 +15,10 @@
 		"settings.devise.euro" : "€ (Euro)", 
 		"settings.devise.pound" : "£ (Pound)", 
 		"settings.devise.dollar" : "$ (Dollar)", 
-		"settings.devise.yen" : "¥ (Yen/Yuan)", 
-		
+		"settings.devise.yen" : "¥ (Yen/Yuan)",
+
+        "msg.shift.field.missing" : "Data missing!",
+
 		"msg.warning.language" : "Restart this app for changes to take effect"
 	};
 	

@@ -19,8 +19,10 @@
 		"settings.devise.pound" : "£ (Livre)", 
 		"settings.devise.dollar" : "$ (Dollar)", 
 		"settings.devise.yen" : "¥ (Yen/Yuan)", 
-		
+
 		// Messages
+        "msg.shift.field.missing" : "data missing!",
+
 		"msg.warning.language" : "La langue sera prise en compte au prochain redémarrage"
 	};
 	
