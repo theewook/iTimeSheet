@@ -17,6 +17,7 @@
         <script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
         <script type="text/javascript" src="js/angular-1.0.8.min.js"></script>
         <script type="text/javascript" src="js/jquery.i18n.min.js"></script>
+        <script type="text/javascript" src="js/jquery.swipeButton-1.2.1.min.js"></script>
         <script type="text/javascript" src="js/i18n_fr.js"></script>
         <script type="text/javascript" src="js/i18n_en.js"></script>
         <script type="text/javascript" src="js/date.js"></script>
@@ -131,7 +132,7 @@
                         $('#itemEditBeginAMShift').addClass('ui-btn-active');
 
                         $('#inputEndAMShift').val('').scroller('destroy');
-                        $('#inputBeginAMShift').val(beginShiftAM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: prefLanguage }));
+                        $('#inputBeginAMShift').val(beginShiftAM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
                         $('#lblEditBeginAMShift').html($('#inputBeginAMShift').val());
                         beginShiftAM = $('#inputBeginAMShift').val();
                     }
@@ -165,7 +166,7 @@
                         $('#itemEditBeginPMShift').addClass('ui-btn-active');
 
                         $('#inputEndPMShift').val('').scroller('destroy');
-                        $('#inputBeginPMShift').val(beginShiftPM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: prefLanguage }));
+                        $('#inputBeginPMShift').val(beginShiftPM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
                         $('#lblEditBeginPMShift').html($('#inputBeginPMShift').val());
                         beginShiftPM = $('#inputBeginPMShift').val();
                     }
@@ -178,7 +179,7 @@
                     $('#itemEditBeginAMShift').addClass('ui-btn-active');
 
                     $('#inputEndAMShift').val('').scroller('destroy');
-                    $('#inputBeginAMShift').val(beginShiftAM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: prefLanguage }));
+                    $('#inputBeginAMShift').val(beginShiftAM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
                     $('#lblEditBeginAMShift').html($('#inputBeginAMShift').val());
                     beginShiftAM = $('#inputBeginAMShift').val();
                 });
@@ -190,8 +191,8 @@
                     $('#itemEditBeginPMShift').addClass('ui-btn-active');
 
                     $('#inputEndPMShift').val('').scroller('destroy');
-                    $('#inputBeginPMShift').val(beginShiftPM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: prefLanguage }));
-                    $('#lblEditBeginPMShift').html($('#inputBeginAMShift').val());
+                    $('#inputBeginPMShift').val(beginShiftPM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
+                    $('#lblEditBeginPMShift').html($('#inputBeginPMShift').val());
                     beginShiftPM = $('#inputBeginPMShift').val();
                 });
 
@@ -202,7 +203,7 @@
                     $('#itemEditBeginAMShift').removeClass('ui-btn-active');
 
                     $('#inputBeginAMShift').val('').scroller('destroy');
-                    $('#inputEndAMShift').val(endShiftAM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: prefLanguage }));
+                    $('#inputEndAMShift').val(endShiftAM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
                     $('#lblEditEndAMShift').html($('#inputEndAMShift').val());
                     endShiftAM = $('#inputEndAMShift').val();
                 });
@@ -214,7 +215,7 @@
                     $('#itemEditBeginPMShift').removeClass('ui-btn-active');
 
                     $('#inputBeginPMShift').val('').scroller('destroy');
-                    $('#inputEndPMShift').val(endShiftPM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: prefLanguage }));
+                    $('#inputEndPMShift').val(endShiftPM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
                     $('#lblEditEndPMShift').html($('#inputEndPMShift').val());
                     endShiftPM = $('#inputEndPMShift').val();
                 });
@@ -241,7 +242,7 @@
                         $('#itemEditEndAMShift').removeClass('ui-btn-active');
                         $('#itemEditBeginAMShift').addClass('ui-btn-active');
 
-                        $('#inputBeginAMShift').val('').scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: prefLanguage }));
+                        $('#inputBeginAMShift').val('').scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
                     }
 
                     $('#lblEditBeginAMShift').html($('#inputBeginAMShift').val());
@@ -273,7 +274,7 @@
                         $('#itemEditEndPMShift').removeClass('ui-btn-active');
                         $('#itemEditBeginPMShift').addClass('ui-btn-active');
 
-                        $('#inputBeginPMShift').val('').scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: prefLanguage }));
+                        $('#inputBeginPMShift').val('').scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
                     }
 
                     $('#lblEditBeginPMShift').html($('#inputBeginPMShift').val());
@@ -281,6 +282,18 @@
 
                     beginShiftPM = $('#inputBeginPMShift').val();
                     endShiftPM = $('#inputEndPMShift').val();
+                });
+
+                // Validate add shift
+                $('#actionDoneAddShift').click(function ()
+                {
+                    var dateId = Date.parse(dateShift).toString("yyyyMMdd");
+                    var dateIdYY = dateId.substr(0,4);
+                    var dateIdMM = dateId.substr(4,2);
+                    var dateIdDD = dateId.substr(6,2);
+                    var id = dateIdYY + (dateIdMM - 1) + dateIdDD;
+
+                    addShift(id, beginShiftAM, endShiftAM, beginShiftPM, endShiftPM);
                 });
 
                 // Validate date shift
@@ -299,10 +312,10 @@
                     $('#lblEndAMShift').html($('#lblEditEndAMShift').text());
                     endShiftAM = $('#lblEditEndAMShift').text();
 
-                    if ($('#sliderWorkedMorningShift').val() == "yes" && (beginShiftAM == "" || endShiftAM == ""))
+                    if (!validateShift(beginShiftAM, endShiftAM, $('#sliderWorkedMorningShift').val()))
                     {
-                        navigator.notification.alert("This is a test","","Info");
-                         // alert($.i18n._('msg.shift.field.missing'));
+//                        navigator.notification.alert("This is a test","","Info");
+                         alert($.i18n._('msg.shift.field.error'));
                     }
                     else
                     {
@@ -319,9 +332,9 @@
                     $('#lblEndPMShift').html($('#lblEditEndPMShift').text());
                     endShiftPM = $('#lblEditEndPMShift').text();
 
-                    if ($('#sliderWorkedAfternoonShift').val() == "yes" && (beginShiftPM == "" || endShiftPM == ""))
+                    if (!validateShift(beginShiftPM, endShiftPM, $('#sliderWorkedAfternoonShift').val()))
                     {
-                        alert($.i18n._('msg.shift.field.missing'));
+                        alert($.i18n._('msg.shift.field.error'));
                     }
                     else
                     {
@@ -336,7 +349,7 @@
                     dateShift = $('#lblDateShift').text();
 
                     // Morning
-                    $('#lblBeginAMShift').html("07:00");
+                    $('#lblBeginAMShift').html("08:00");
                     $('#lblEditBeginAMShift').html($('#lblBeginAMShift').text());
                     beginShiftAM = $('#lblBeginAMShift').text();
 
@@ -345,11 +358,11 @@
                     endShiftAM = $('#lblEndAMShift').text();
 
                     // Afternoon
-                    $('#lblBeginPMShift').html("07:00");
+                    $('#lblBeginPMShift').html("14:00");
                     $('#lblEditBeginPMShift').html($('#lblBeginPMShift').text());
                     beginShiftPM = $('#lblBeginPMShift').text();
 
-                    $('#lblEndPMShift').html("12:00");
+                    $('#lblEndPMShift').html("18:00");
                     $('#lblEditEndPMShift').html($('#lblEndPMShift').text());
                     endShiftPM = $('#lblEndPMShift').text();
                 });
@@ -449,7 +462,7 @@
 
             function createDB(tx)
             {
-                //tx.executeSql('DROP TABLE IF EXISTS EVENTS');
+//                tx.executeSql('DROP TABLE IF EXISTS EVENTS');
                 //tx.executeSql('DROP TABLE IF EXISTS PREFS');
                 tx.executeSql('CREATE TABLE IF NOT EXISTS EVENTS (id UNIQUE, beginAM, endAM, beginPM, endPM)');
         //			     tx.executeSql('INSERT INTO EVENTS (id, beginAM, endAM, beginPM, endPM) VALUES (20130818, "08:30", "12:30", "13:00", "18:30")');
@@ -462,6 +475,68 @@
             function errorDB(err)
             {
                 alert("Error processing SQL: " + err.code + " - " + err.message);
+            }
+
+            function load()
+            {
+                loadAllEvent();
+
+                // Loading the preferences
+                $('#viewMealVoucher, #viewLanguage, #viewDevise, #viewExtraHoursPolicy').page();
+
+                findPreference("hourlyrate", function (result)
+                {
+                    prefHourlyRate = result == null ? "0" : result;
+                    $('#inputSettingsHourlyRate').val(prefHourlyRate);
+                });
+
+                findPreference("extrahourspolicy", function (result)
+                {
+                    prefExtraHoursPolicy = result == null ? "100|150;35-40|200" : result;
+
+                    var levelSplit = prefExtraHoursPolicy.split('|');
+                    var level1 = levelSplit[0];
+                    var level2 = levelSplit[1];
+                    var level3 = levelSplit[2];
+
+                    $('#selectLevel1').val(parseInt(level1));
+                    $('#selectLevel1').selectmenu("refresh");
+
+                    var level2Split = level2.split(';');
+
+                    $('#selectLevel2').val(parseInt(level2Split[0]));
+                    $('#selectLevel2').selectmenu("refresh");
+
+                    $('#rangeMaxLevel2').val(level2Split[1].split('-')[1]);
+                    $('#rangeMaxLevel2').slider("refresh");
+                    $('#rangeMinLevel2').val(level2Split[1].split('-')[0]);
+                    $('#rangeMinLevel2').slider("refresh");
+
+                    $('#selectLevel3').val(parseInt(level3));
+                    $('#selectLevel3').selectmenu("refresh");
+                })
+
+                findPreference("lang", function (result)
+                {
+                    prefLanguage = result == null ? codeLang : result;
+                    $('#radioLang' + prefLanguage.capitalize()).prop("checked", true).checkboxradio("refresh");
+
+                    findPreference("mealvoucher", function (result)
+                    {
+                        prefMealVoucher = result == null ? "60" : result;
+                        $('#radioMealVoucher' + prefMealVoucher).prop("checked", true).checkboxradio("refresh");
+
+                        findPreference("devise", function (result)
+                        {
+                            prefDevise = result == null ? "euro" : result;
+                            $('#radioDevise' + prefDevise.capitalize()).prop("checked", true).checkboxradio("refresh");
+
+                            doTranslation();
+                        });
+                    });
+
+                    displayCalendar();
+                });
             }
 
             function loadAllEvent()
@@ -492,63 +567,7 @@
 
                             events[i] = event_details;
                         }
-
-                        // Loading the preferences
-                        $('#viewMealVoucher, #viewLanguage, #viewDevise, #viewExtraHoursPolicy').page();
-
-                        findPreference("hourlyrate", function (result)
-                        {
-                            prefHourlyRate = result == null ? "0" : result;
-                            $('#inputSettingsHourlyRate').val(prefHourlyRate);
-                        });
-
-                        findPreference("extrahourspolicy", function (result)
-                        {
-                            prefExtraHoursPolicy = result == null ? "100|150;35-40|200" : result;
-
-                            var levelSplit = prefExtraHoursPolicy.split('|');
-                            var level1 = levelSplit[0];
-                            var level2 = levelSplit[1];
-                            var level3 = levelSplit[2];
-
-                            $('#selectLevel1').val(parseInt(level1));
-                            $('#selectLevel1').selectmenu("refresh");
-
-                            var level2Split = level2.split(';');
-
-                            $('#selectLevel2').val(parseInt(level2Split[0]));
-                            $('#selectLevel2').selectmenu("refresh");
-
-                            $('#rangeMaxLevel2').val(level2Split[1].split('-')[1]);
-                            $('#rangeMaxLevel2').slider("refresh");
-                            $('#rangeMinLevel2').val(level2Split[1].split('-')[0]);
-                            $('#rangeMinLevel2').slider("refresh");
-
-                            $('#selectLevel3').val(parseInt(level3));
-                            $('#selectLevel3').selectmenu("refresh");
-                        })
-
-                        findPreference("lang", function (result)
-                        {
-                            prefLanguage = result == null ? codeLang : result;
-                            $('#radioLang' + prefLanguage.capitalize()).prop("checked", true).checkboxradio("refresh");
-
-                            findPreference("mealvoucher", function (result)
-                            {
-                                prefMealVoucher = result == null ? "60" : result;
-                                $('#radioMealVoucher' + prefMealVoucher).prop("checked", true).checkboxradio("refresh");
-
-                                findPreference("devise", function (result)
-                                {
-                                    prefDevise = result == null ? "euro" : result;
-                                    $('#radioDevise' + prefDevise.capitalize()).prop("checked", true).checkboxradio("refresh");
-
-                                    doTranslation();
-                                });
-                            });
-
-                            displayCalendar();
-                        });
+                        refreshCalendar();
                     }, errorDB);
                 }, errorDB);
             }
@@ -557,7 +576,7 @@
             function onDeviceReady()
             {
                 var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
-                db.transaction(createDB, errorDB, loadAllEvent);
+                db.transaction(createDB, errorDB, load);
             }
 
             function findPreference(name, callback)
@@ -590,14 +609,81 @@
                 }, errorDB);
             }
 
+            function deleteShift(dateId)
+            {
+                var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
+
+                db.transaction(function query(tx)
+                {
+                    var sql = 'SELECT * FROM EVENTS WHERE id = ?';
+                    tx.executeSql(sql, [dateId], function querySuccess(tx, results)
+                    {
+                        var len = results.rows.length;
+
+                        if (len > 0)
+                        {
+                            var sql = 'DELETE FROM EVENTS WHERE id = ?';
+                            tx.executeSql(sql, [dateId], function querySuccess(tx, results) {
+
+                                for (var i = 0; i < events.length; i++)
+                                {
+                                    var dateEvent = events[i].day;
+                                    var curDateId = dateEvent.getFullYear() + "" + dateEvent.getMonth() + "" + dateEvent.getDate();
+
+                                    if (curDateId === dateId)
+                                    {
+                                        events.splice(i, 1);
+                                        break;
+                                    }
+                                }
+                                refreshCalendar();
+                            }, errorDB)
+                        }
+                    }, errorDB);
+                }, errorDB);
+            }
+
+            function addShift(dateId, beginAM, endAM, beginPM, endPM)
+            {
+                var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
+
+                db.transaction(function query(tx)
+                {
+                    var sql = 'SELECT * FROM EVENTS WHERE id = ?';
+                    tx.executeSql(sql, [dateId], function querySuccess(tx, results)
+                    {
+                        var len = results.rows.length;
+
+                        if (len == 0)
+                        {
+                            var sql = 'INSERT INTO EVENTS ("id", "beginAM", "endAM", "beginPM", "endPM") VALUES (?, ?, ?, ?, ?)';
+                            tx.executeSql(sql, [dateId, beginAM, endAM, beginPM, endPM], function querySuccess(tx, results) {
+                                loadAllEvent();
+                                $.mobile.changePage("#viewCalendar", { transition: "slidedown", reverse: false, changeHash: false });
+                            }, errorDB)
+                        }
+                        else
+                        {
+                            alert($.i18n._('msg.shift.already.exist'));
+                        }
+                    }, errorDB);
+                }, errorDB);
+            }
+
             function displayCalendar()
             {
                 $('#calendar').jqmCalendar({
                     events: events,
                     months: months,
                     days: days,
-                    startOfWeek: 1
+                    startOfWeek: 1,
+                    index: this
                 });
+            }
+
+            function refreshCalendar()
+            {
+                $("#calendar").trigger('refresh');
             }
 
             function doTranslation()
@@ -670,7 +756,7 @@
             <a href="#viewCalendar" data-transition="slidedown" data-role="button">Cancel</a>
 
             <h1 class="">Add shift</h1>
-            <a href="#viewCalendar" data-transition="slidedown" data-role="button">Done</a>
+            <a href="#" id="actionDoneAddShift" data-transition="slidedown" data-role="button">Done</a>
         </div>
 
         <div data-role="content" class="content">

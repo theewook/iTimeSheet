@@ -21,7 +21,8 @@
 		"settings.devise.yen" : "¥ (Yen/Yuan)", 
 
 		// Messages
-        "msg.shift.field.missing" : "data missing!",
+        "msg.shift.already.exist" : "Creneaux déjà existant pour ce jour!",
+        "msg.shift.field.error" : "Erreur dans le données entrées!",
 
 		"msg.warning.language" : "La langue sera prise en compte au prochain redémarrage"
 	};

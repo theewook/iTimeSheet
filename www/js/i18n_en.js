@@ -17,7 +17,8 @@
 		"settings.devise.dollar" : "$ (Dollar)", 
 		"settings.devise.yen" : "¥ (Yen/Yuan)",
 
-        "msg.shift.field.missing" : "Data missing!",
+        "msg.shift.already.exist" : "Shift already exist for this date!",
+        "msg.shift.field.error" : "Data error!",
 
 		"msg.warning.language" : "Restart this app for changes to take effect"
 	};
