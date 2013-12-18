@@ -1,9 +1,21 @@
-	var i18n_dict_en = { 
-		"main.title"  : "Calendar",
+	var i18n_dict_en = {
+
+		"main.title"  : "iTimeSheet",
+        "main.calendar"  : "Calendar",
+        "main.report"  : "Reports",
 		"main.settings" : "Settings",
-		
+
+        // Calendar
 		"calendar.button.today"  : "Today",
-		
+        "calendar.button.add"  : "Add",
+
+        // Report
+
+
+
+        // Settings
+        "settings.mealvoucher"  : "Meal Voucher",
+
 		"settings.language.en" : "English",
 		"settings.language.fr" : "French",
 		
@@ -17,9 +29,9 @@
 		"settings.devise.dollar" : "$ (Dollar)", 
 		"settings.devise.yen" : "¥ (Yen/Yuan)",
 
+        // Messages
         "msg.shift.already.exist" : "Shift already exist for this date!",
         "msg.shift.field.error" : "Data error!",
-
 		"msg.warning.language" : "Restart this app for changes to take effect"
 	};
 	

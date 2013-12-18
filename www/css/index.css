@@ -140,11 +140,11 @@ li[data-swipeurl] .aSwipeBtn {
 
     height: 22px;
     line-height: 22px;
-    margin: 3px 3px 3px 3px; !important;
-    padding-bottom: 18px; !important;
+    margin: 3px 3px 3px 3px !important;
+    padding-bottom: 18px !important;
     /*padding: 0.6em;*/
     position: absolute;
-    font-size: 16px; !important;
+    font-size: 16px !important;
     right: 0;
     top: 10px;
     z-index: 10;

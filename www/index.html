@@ -1,7 +1,7 @@
 <!doctype html>
 <html ng-app="iTimeSheet">
     <head>
-        <title>Calendar</title>
+        <title>iTimeSheet</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf8"/>
         <meta name="format-detection" content="telephone=no"/>
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width, height=device-height"/>
@@ -20,7 +20,8 @@
         <script type="text/javascript" src="js/jquery.swipeButton-1.2.1.min.js"></script>
         <script type="text/javascript" src="js/i18n_fr.js"></script>
         <script type="text/javascript" src="js/i18n_en.js"></script>
-        <script type="text/javascript" src="js/date.js"></script>
+        <script type="text/javascript" src="js/date-fr-FR.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/jw-jqm-cal.js"></script>
         <script type='application/javascript' src='js/fastclick.min.js'></script>
@@ -28,691 +29,6 @@
 
         <script src="js/report.js"></script>
         <script src="js/components.js"></script>
-
-        <script type="text/javascript">
-            var months = months_en;
-            var days = days_en;
-            var dateFormat = dateFormat_en;
-            var dateOrder = dateOrder_en;
-
-            var language = window.navigator.userLanguage || window.navigator.language;
-            codeLang = language.substr(0, 2);
-
-            //codeLang = 'fr';
-
-            var curr = new Date().getFullYear();
-            var opt = {}
-
-            opt.date = {preset: 'date', dateFormat: dateFormat, dateOrder: dateOrder, endYear: curr + 100};
-            opt.time = {preset: 'time', stepMinute: 5};
-
-            var prefLanguage = null;
-            var prefMealVoucher = null;
-            var prefDevise = null;
-            var prefHourlyRate = null;
-            var prefExtraHoursPolicy = null;
-
-            $(document).ready(function ()
-            {
-                var dateShift;
-                var beginShiftAM;
-                var endShiftAM;
-                var beginShiftPM;
-                var endShiftPM;
-
-                $('#inputDateShift').on("change input", function() {
-                    $('#lblEditDateShift').html(this.value);
-                    dateShift = this.value;
-                });
-
-                $('#inputBeginAMShift').on("change input", function ()
-                {
-                    $('#lblEditBeginAMShift').html(this.value);
-                    beginShiftAM = this.value;
-                });
-
-                $('#inputEndAMShift').on("change input", function ()
-                {
-                    $('#lblEditEndAMShift').html(this.value);
-                    endShiftAM = this.value;
-                });
-
-                $('#inputBeginPMShift').on("change input", function ()
-                {
-                    $('#lblEditBeginPMShift').html(this.value);
-                    beginShiftPM = this.value;
-                });
-
-                $('#inputEndPMShift').on("change input", function ()
-                {
-                    $('#lblEditEndPMShift').html(this.value);
-                    endShiftPM = this.value;
-                });
-
-                ///////////////////////////////////////////////////
-
-                // Edit date shift
-                $('#actionEditDateShift').click(function ()
-                {
-                    $('#itemEditDateShift').addClass('ui-btn-active');
-
-                    $('#inputDateShift').val(dateShift).scroller('destroy').scroller($.extend(opt['date'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: prefLanguage }));
-                    $('#lblEditDateShift').html($('#inputDateShift').val());
-                    $('#inputDateShift').html(dateShift);
-
-                    dateShift = $('#inputDateShift').val();
-                    $('#inputDateShift').focus();
-                });
-
-                // Edit morning shift
-                $('#actionEditMorningShift').click(function ()
-                {
-                    if (beginShiftAM == '' && endShiftAM == '')
-                    {
-                        $('#sliderWorkedMorningShift').slider();
-                        $('#sliderWorkedMorningShift').val("no");
-                        $('#sliderWorkedMorningShift').slider('refresh');
-
-                        $('#itemEditEndAMShift').removeClass('ui-btn-active');
-                        $('#itemEditBeginAMShift').removeClass('ui-btn-active');
-
-                        $('#itemEditBeginAMShift').addClass('ui-disabled');
-                        $('#itemEditEndAMShift').addClass('ui-disabled');
-                    }
-                    else
-                    {
-                        $('#sliderWorkedMorningShift').slider();
-                        $('#sliderWorkedMorningShift').val("yes");
-                        $('#sliderWorkedMorningShift').slider('refresh');
-
-                        $('#itemEditBeginAMShift').removeClass('ui-disabled');
-                        $('#itemEditEndAMShift').removeClass('ui-disabled');
-
-                        $('#itemEditEndAMShift').removeClass('ui-btn-active');
-                        $('#itemEditBeginAMShift').addClass('ui-btn-active');
-
-                        $('#inputEndAMShift').val('').scroller('destroy');
-                        $('#inputBeginAMShift').val(beginShiftAM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
-                        $('#lblEditBeginAMShift').html($('#inputBeginAMShift').val());
-                        beginShiftAM = $('#inputBeginAMShift').val();
-                    }
-                });
-
-                // Edit afternoon shift
-                $('#actionEditAfternoonShift').click(function ()
-                {
-                    if (beginShiftPM == '' && endShiftPM == '')
-                    {
-                        $('#sliderWorkedAfternoonShift').slider();
-                        $('#sliderWorkedAfternoonShift').val("no");
-                        $('#sliderWorkedAfternoonShift').slider('refresh');
-
-                        $('#itemEditEndPMShift').removeClass('ui-btn-active');
-                        $('#itemEditBeginPMShift').removeClass('ui-btn-active');
-
-                        $('#itemEditBeginPMShift').addClass('ui-disabled');
-                        $('#itemEditEndPMShift').addClass('ui-disabled');
-                    }
-                    else
-                    {
-                        $('#sliderWorkedAfternoonShift').slider();
-                        $('#sliderWorkedAfternoonShift').val("yes");
-                        $('#sliderWorkedAfternoonShift').slider('refresh');
-
-                        $('#itemEditBeginPMShift').removeClass('ui-disabled');
-                        $('#itemEditEndPMShift').removeClass('ui-disabled');
-
-                        $('#itemEditEndPMShift').removeClass('ui-btn-active');
-                        $('#itemEditBeginPMShift').addClass('ui-btn-active');
-
-                        $('#inputEndPMShift').val('').scroller('destroy');
-                        $('#inputBeginPMShift').val(beginShiftPM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
-                        $('#lblEditBeginPMShift').html($('#inputBeginPMShift').val());
-                        beginShiftPM = $('#inputBeginPMShift').val();
-                    }
-                });
-
-                // Edit check-in morning shift
-                $('#itemEditBeginAMShift').click(function ()
-                {
-                    $('#itemEditEndAMShift').removeClass('ui-btn-active');
-                    $('#itemEditBeginAMShift').addClass('ui-btn-active');
-
-                    $('#inputEndAMShift').val('').scroller('destroy');
-                    $('#inputBeginAMShift').val(beginShiftAM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
-                    $('#lblEditBeginAMShift').html($('#inputBeginAMShift').val());
-                    beginShiftAM = $('#inputBeginAMShift').val();
-                });
-
-                // Edit check-in afternoon shift
-                $('#itemEditBeginPMShift').click(function ()
-                {
-                    $('#itemEditEndPMShift').removeClass('ui-btn-active');
-                    $('#itemEditBeginPMShift').addClass('ui-btn-active');
-
-                    $('#inputEndPMShift').val('').scroller('destroy');
-                    $('#inputBeginPMShift').val(beginShiftPM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
-                    $('#lblEditBeginPMShift').html($('#inputBeginPMShift').val());
-                    beginShiftPM = $('#inputBeginPMShift').val();
-                });
-
-                // Edit check-out morning shift
-                $('#itemEditEndAMShift').click(function ()
-                {
-                    $('#itemEditEndAMShift').addClass('ui-btn-active');
-                    $('#itemEditBeginAMShift').removeClass('ui-btn-active');
-
-                    $('#inputBeginAMShift').val('').scroller('destroy');
-                    $('#inputEndAMShift').val(endShiftAM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
-                    $('#lblEditEndAMShift').html($('#inputEndAMShift').val());
-                    endShiftAM = $('#inputEndAMShift').val();
-                });
-
-                // Edit check-out afternoon shift
-                $('#itemEditEndPMShift').click(function ()
-                {
-                    $('#itemEditEndPMShift').addClass('ui-btn-active');
-                    $('#itemEditBeginPMShift').removeClass('ui-btn-active');
-
-                    $('#inputBeginPMShift').val('').scroller('destroy');
-                    $('#inputEndPMShift').val(endShiftPM).scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
-                    $('#lblEditEndPMShift').html($('#inputEndPMShift').val());
-                    endShiftPM = $('#inputEndPMShift').val();
-                });
-
-                // Slider worked? morning shift
-                $('#sliderWorkedMorningShift').change(function (event, ui)
-                {
-                    if (event.currentTarget.value == 'no')
-                    {
-                        $('#inputEndAMShift').val('').scroller('destroy');
-                        $('#inputBeginAMShift').val('').scroller('destroy');
-
-                        $('#itemEditEndAMShift').removeClass('ui-btn-active');
-                        $('#itemEditBeginAMShift').removeClass('ui-btn-active');
-
-                        $('#itemEditBeginAMShift').addClass('ui-disabled');
-                        $('#itemEditEndAMShift').addClass('ui-disabled');
-                    }
-                    else
-                    {
-                        $('#itemEditBeginAMShift').removeClass('ui-disabled');
-                        $('#itemEditEndAMShift').removeClass('ui-disabled');
-
-                        $('#itemEditEndAMShift').removeClass('ui-btn-active');
-                        $('#itemEditBeginAMShift').addClass('ui-btn-active');
-
-                        $('#inputBeginAMShift').val('').scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
-                    }
-
-                    $('#lblEditBeginAMShift').html($('#inputBeginAMShift').val());
-                    $('#lblEditEndAMShift').html($('#inputEndAMShift').val());
-
-                    beginShiftAM = $('#inputBeginAMShift').val();
-                    endShiftAM = $('#inputEndAMShift').val();
-                });
-
-                // Slider worked? afternoon shift
-                $('#sliderWorkedAfternoonShift').change(function (event, ui)
-                {
-                    if (event.currentTarget.value == 'no')
-                    {
-                        $('#inputEndPMShift').val('').scroller('destroy');
-                        $('#inputBeginPMShift').val('').scroller('destroy');
-
-                        $('#itemEditEndPMShift').removeClass('ui-btn-active');
-                        $('#itemEditBeginPMShift').removeClass('ui-btn-active');
-
-                        $('#itemEditBeginPMShift').addClass('ui-disabled');
-                        $('#itemEditEndPMShift').addClass('ui-disabled');
-                    }
-                    else
-                    {
-                        $('#itemEditBeginPMShift').removeClass('ui-disabled');
-                        $('#itemEditEndPMShift').removeClass('ui-disabled');
-
-                        $('#itemEditEndPMShift').removeClass('ui-btn-active');
-                        $('#itemEditBeginPMShift').addClass('ui-btn-active');
-
-                        $('#inputBeginPMShift').val('').scroller('destroy').scroller($.extend(opt['time'], { theme: 'ios', mode: 'scroller', display: 'inline', lang: 'fr' }));
-                    }
-
-                    $('#lblEditBeginPMShift').html($('#inputBeginPMShift').val());
-                    $('#lblEditEndPMShift').html($('#inputEndPMShift').val());
-
-                    beginShiftPM = $('#inputBeginPMShift').val();
-                    endShiftPM = $('#inputEndPMShift').val();
-                });
-
-                // Validate add shift
-                $('#actionDoneAddShift').click(function ()
-                {
-                    var dateId = Date.parse(dateShift).toString("yyyyMMdd");
-                    var dateIdYY = dateId.substr(0,4);
-                    var dateIdMM = dateId.substr(4,2);
-                    var dateIdDD = dateId.substr(6,2);
-                    var id = dateIdYY + (dateIdMM - 1) + dateIdDD;
-
-                    addShift(id, beginShiftAM, endShiftAM, beginShiftPM, endShiftPM);
-                });
-
-                // Validate date shift
-                $('#actionDoneDateShift').click(function ()
-                {
-                    $('#lblDateShift').html($('#lblEditDateShift').text());
-                    dateShift = $('#lblEditDateShift').text();
-                });
-
-                // Validate morning shift
-                $('#actionDoneMorningShift').click(function ()
-                {
-                    $('#lblBeginAMShift').html($('#lblEditBeginAMShift').text());
-                    beginShiftAM = $('#lblEditBeginAMShift').text();
-
-                    $('#lblEndAMShift').html($('#lblEditEndAMShift').text());
-                    endShiftAM = $('#lblEditEndAMShift').text();
-
-                    if (!validateShift(beginShiftAM, endShiftAM, $('#sliderWorkedMorningShift').val()))
-                    {
-//                        navigator.notification.alert("This is a test","","Info");
-                         alert($.i18n._('msg.shift.field.error'));
-                    }
-                    else
-                    {
-                        $.mobile.changePage("#viewAddShift", { transition: "slide", reverse: true, changeHash: false });
-                    }
-                });
-
-                // Validate afternoon shift
-                $('#actionDoneAfternoonShift').click(function ()
-                {
-                    $('#lblBeginPMShift').html($('#lblEditBeginPMShift').text());
-                    beginShiftPM = $('#lblEditBeginPMShift').text();
-
-                    $('#lblEndPMShift').html($('#lblEditEndPMShift').text());
-                    endShiftPM = $('#lblEditEndPMShift').text();
-
-                    if (!validateShift(beginShiftPM, endShiftPM, $('#sliderWorkedAfternoonShift').val()))
-                    {
-                        alert($.i18n._('msg.shift.field.error'));
-                    }
-                    else
-                    {
-                        $.mobile.changePage("#viewAddShift", { transition: "slide", reverse: true, changeHash: false });
-                    }
-                });
-
-                // Add a new shift
-                $('#actionAddShift').click(function ()
-                {
-                    $('#lblDateShift').html(new Date().toString('dd MMMM yyyy'));
-                    dateShift = $('#lblDateShift').text();
-
-                    // Morning
-                    $('#lblBeginAMShift').html("08:00");
-                    $('#lblEditBeginAMShift').html($('#lblBeginAMShift').text());
-                    beginShiftAM = $('#lblBeginAMShift').text();
-
-                    $('#lblEndAMShift').html("12:00");
-                    $('#lblEditEndAMShift').html($('#lblEndAMShift').text());
-                    endShiftAM = $('#lblEndAMShift').text();
-
-                    // Afternoon
-                    $('#lblBeginPMShift').html("14:00");
-                    $('#lblEditBeginPMShift').html($('#lblBeginPMShift').text());
-                    beginShiftPM = $('#lblBeginPMShift').text();
-
-                    $('#lblEndPMShift').html("18:00");
-                    $('#lblEditEndPMShift').html($('#lblEndPMShift').text());
-                    endShiftPM = $('#lblEndPMShift').text();
-                });
-
-                ///////////////////////////////////////////////////
-
-                // Report Summary from Calendar
-                $('#actionCalendarViewReport').click(function ()
-                {
-                    $('#actionReportViewReport').click();
-                });
-
-                // Report Weekly
-                $('#itemReportWeekly, #itemReportMonthly').click(function ()
-                {
-                   $('#viewReportSummary').hide();
-                   $('#viewReportDetail').show();
-                });
-
-                // Report Summary
-                $('#actionReportViewReport').click(function ()
-                {
-                   $('#itemReportWeekly').removeClass('ui-btn-active');
-                   $('#itemReportMonthly').removeClass('ui-btn-active');
-
-                   $('#viewReportSummary').show();
-                   $('#viewReportDetail').hide();
-                });
-
-                ///////////////////////////////////////////////////
-
-                $("#viewLanguage input[type='radio']").change(function (event, ui)
-                {
-                    prefLanguage = event.currentTarget.value;
-                    updatePreference("lang", prefLanguage);
-                    doTranslation();
-
-                    $.mobile.changePage("#viewSettings", { transition: "slide", reverse: true, changeHash: false });
-                });
-
-                $("#viewMealVoucher input[type='radio']").change(function (event, ui)
-                {
-                    prefMealVoucher = event.currentTarget.value;
-                    updatePreference("mealvoucher", prefMealVoucher);
-                    $('#lblSettingsMealVoucher').text($.i18n._('settings.mealvoucher.' + prefMealVoucher));
-
-                    $.mobile.changePage("#viewSettings", { transition: "slide", reverse: true, changeHash: false });
-                });
-
-                $("#viewDevise input[type='radio']").change(function (event, ui)
-                {
-                    prefDevise = event.currentTarget.value;
-                    updatePreference("devise", prefDevise);
-                    $('#lblSettingsDevise').text($.i18n._('settings.devise.' + prefDevise));
-
-                    $.mobile.changePage("#viewSettings", { transition: "slide", reverse: true, changeHash: false });
-                });
-
-                $("#inputSettingsHourlyRate").blur(function (event, ui)
-                {
-                    prefHourlyRate = $('#inputSettingsHourlyRate').val();
-                    updatePreference("hourlyrate", prefHourlyRate);
-                });
-
-                $("#actionSettingsEditHourlyRate").click(function (event, ui)
-                {
-                    $('#inputSettingsHourlyRate').focus();
-                });
-
-                $("#backExtraHoursPolicy").click(function (event, ui)
-                {
-                    var level1 = $('#selectLevel1').val();
-
-                    var level2 = $('#selectLevel2').val();
-                    level2 += ";" + $('#rangeMinLevel2').val();
-                    level2 += "-" + $('#rangeMaxLevel2').val();
-
-                    var level3 = $('#selectLevel3').val();
-
-                    prefExtraHoursPolicy = level1 + "|" + level2 + "|" + level3;
-                    updatePreference("extrahourspolicy", prefExtraHoursPolicy);
-                });
-            });
-        </script>
-
-        <script type="text/javascript" charset="utf-8">
-
-            // Wait for PhoneGap to load
-            document.addEventListener("deviceready", onDeviceReady, false);
-
-            window.addEventListener('load', function ()
-            {
-                FastClick.attach(document.body);
-            }, false);
-
-            var events = [];
-
-            function createDB(tx)
-            {
-//                tx.executeSql('DROP TABLE IF EXISTS EVENTS');
-                //tx.executeSql('DROP TABLE IF EXISTS PREFS');
-                tx.executeSql('CREATE TABLE IF NOT EXISTS EVENTS (id UNIQUE, beginAM, endAM, beginPM, endPM)');
-        //			     tx.executeSql('INSERT INTO EVENTS (id, beginAM, endAM, beginPM, endPM) VALUES (20130818, "08:30", "12:30", "13:00", "18:30")');
-        //			     tx.executeSql('INSERT INTO EVENTS (id, beginAM, endAM, beginPM, endPM) VALUES (20130816, "08:00", "10:00", "14:00", "15:00")');
-                tx.executeSql('CREATE TABLE IF NOT EXISTS PREFS (name UNIQUE, value)');
-                // tx.executeSql('INSERT INTO PREFS (name, value) VALUES ("lang", "en")');
-                // tx.executeSql('INSERT INTO PREFS (name, value) VALUES ("mealvoucher", "15")');
-            }
-
-            function errorDB(err)
-            {
-                alert("Error processing SQL: " + err.code + " - " + err.message);
-            }
-
-            function load()
-            {
-                loadAllEvent();
-
-                // Loading the preferences
-                $('#viewMealVoucher, #viewLanguage, #viewDevise, #viewExtraHoursPolicy').page();
-
-                findPreference("hourlyrate", function (result)
-                {
-                    prefHourlyRate = result == null ? "0" : result;
-                    $('#inputSettingsHourlyRate').val(prefHourlyRate);
-                });
-
-                findPreference("extrahourspolicy", function (result)
-                {
-                    prefExtraHoursPolicy = result == null ? "100|150;35-40|200" : result;
-
-                    var levelSplit = prefExtraHoursPolicy.split('|');
-                    var level1 = levelSplit[0];
-                    var level2 = levelSplit[1];
-                    var level3 = levelSplit[2];
-
-                    $('#selectLevel1').val(parseInt(level1));
-                    $('#selectLevel1').selectmenu("refresh");
-
-                    var level2Split = level2.split(';');
-
-                    $('#selectLevel2').val(parseInt(level2Split[0]));
-                    $('#selectLevel2').selectmenu("refresh");
-
-                    $('#rangeMaxLevel2').val(level2Split[1].split('-')[1]);
-                    $('#rangeMaxLevel2').slider("refresh");
-                    $('#rangeMinLevel2').val(level2Split[1].split('-')[0]);
-                    $('#rangeMinLevel2').slider("refresh");
-
-                    $('#selectLevel3').val(parseInt(level3));
-                    $('#selectLevel3').selectmenu("refresh");
-                })
-
-                findPreference("lang", function (result)
-                {
-                    prefLanguage = result == null ? codeLang : result;
-                    $('#radioLang' + prefLanguage.capitalize()).prop("checked", true).checkboxradio("refresh");
-
-                    findPreference("mealvoucher", function (result)
-                    {
-                        prefMealVoucher = result == null ? "60" : result;
-                        $('#radioMealVoucher' + prefMealVoucher).prop("checked", true).checkboxradio("refresh");
-
-                        findPreference("devise", function (result)
-                        {
-                            prefDevise = result == null ? "euro" : result;
-                            $('#radioDevise' + prefDevise.capitalize()).prop("checked", true).checkboxradio("refresh");
-
-                            doTranslation();
-                        });
-                    });
-
-                    displayCalendar();
-                });
-            }
-
-            function loadAllEvent()
-            {
-                var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
-
-                db.transaction(function query(tx)
-                {
-                    var sql = 'SELECT * FROM EVENTS';
-                    tx.executeSql(sql, [], function querySuccess(tx, results)
-                    {
-                        var len = results.rows.length;
-
-                        for (var i = 0; i < len; i++)
-                        {
-                            var date = results.rows.item(i).id.toString();
-
-                            var year = date.substr(0, 4);
-                            var month = date.substr(4, 2);
-                            var day = date.substr(6, 2);
-
-                            var event_details = [];
-                            event_details['day'] = new Date(year, month, day);
-                            event_details['beginAM'] = results.rows.item(i).beginAM;
-                            event_details['endAM'] = results.rows.item(i).endAM;
-                            event_details['beginPM'] = results.rows.item(i).beginPM;
-                            event_details['endPM'] = results.rows.item(i).endPM;
-
-                            events[i] = event_details;
-                        }
-                        refreshCalendar();
-                    }, errorDB);
-                }, errorDB);
-            }
-
-            // PhoneGap is ready
-            function onDeviceReady()
-            {
-                var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
-                db.transaction(createDB, errorDB, load);
-            }
-
-            function findPreference(name, callback)
-            {
-                var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
-
-                db.transaction(function query(tx)
-                {
-                    var sql = 'SELECT * FROM PREFS where name=?';
-                    tx.executeSql(sql, [name], function querySuccess(tx, results)
-                    {
-                        var result = null;
-                        if (results.rows.length > 0) {
-                            result = results.rows.item(0).value;
-                        }
-                        callback(result);
-                    }, errorDB);
-                }, errorDB);
-            }
-
-            function updatePreference(name, value)
-            {
-                var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
-
-                db.transaction(function query(tx)
-                {
-                    var sql = 'INSERT or REPLACE INTO PREFS ("name", "value") VALUES (?, ?)';
-                    tx.executeSql(sql, [name, value], function querySuccess(tx, results) {
-                    }, errorDB);
-                }, errorDB);
-            }
-
-            function deleteShift(dateId)
-            {
-                var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
-
-                db.transaction(function query(tx)
-                {
-                    var sql = 'SELECT * FROM EVENTS WHERE id = ?';
-                    tx.executeSql(sql, [dateId], function querySuccess(tx, results)
-                    {
-                        var len = results.rows.length;
-
-                        if (len > 0)
-                        {
-                            var sql = 'DELETE FROM EVENTS WHERE id = ?';
-                            tx.executeSql(sql, [dateId], function querySuccess(tx, results) {
-
-                                for (var i = 0; i < events.length; i++)
-                                {
-                                    var dateEvent = events[i].day;
-                                    var curDateId = dateEvent.getFullYear() + "" + dateEvent.getMonth() + "" + dateEvent.getDate();
-
-                                    if (curDateId === dateId)
-                                    {
-                                        events.splice(i, 1);
-                                        break;
-                                    }
-                                }
-                                refreshCalendar();
-                            }, errorDB)
-                        }
-                    }, errorDB);
-                }, errorDB);
-            }
-
-            function addShift(dateId, beginAM, endAM, beginPM, endPM)
-            {
-                var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
-
-                db.transaction(function query(tx)
-                {
-                    var sql = 'SELECT * FROM EVENTS WHERE id = ?';
-                    tx.executeSql(sql, [dateId], function querySuccess(tx, results)
-                    {
-                        var len = results.rows.length;
-
-                        if (len == 0)
-                        {
-                            var sql = 'INSERT INTO EVENTS ("id", "beginAM", "endAM", "beginPM", "endPM") VALUES (?, ?, ?, ?, ?)';
-                            tx.executeSql(sql, [dateId, beginAM, endAM, beginPM, endPM], function querySuccess(tx, results) {
-                                loadAllEvent();
-                                $.mobile.changePage("#viewCalendar", { transition: "slidedown", reverse: false, changeHash: false });
-                            }, errorDB)
-                        }
-                        else
-                        {
-                            alert($.i18n._('msg.shift.already.exist'));
-                        }
-                    }, errorDB);
-                }, errorDB);
-            }
-
-            function displayCalendar()
-            {
-                $('#calendar').jqmCalendar({
-                    events: events,
-                    months: months,
-                    days: days,
-                    startOfWeek: 1,
-                    index: this
-                });
-            }
-
-            function refreshCalendar()
-            {
-                $("#calendar").trigger('refresh');
-            }
-
-            function doTranslation()
-            {
-                if (prefLanguage == "fr")
-                {
-                    months = months_fr;
-                    days = days_fr;
-                    dateFormat = dateFormat_fr;
-                    dateOrder = dateOrder_fr;
-                    $.i18n.setDictionary(i18n_dict_fr);
-                }
-                else
-                {
-                    months = months_en;
-                    days = days_en;
-                    dateFormat = dateFormat_en;
-                    dateOrder = dateOrder_en;
-                    $.i18n.setDictionary(i18n_dict_en);
-                }
-
-                $('#lblSettings').text($.i18n._('main.settings'));
-
-                $('#lblSettingsLanguage').text($.i18n._('settings.language.' + prefLanguage));
-                $('#lblSettingsMealVoucher').text($.i18n._('settings.mealvoucher.' + prefMealVoucher));
-                $('#lblSettingsDevise').text($.i18n._('settings.devise.' + prefDevise));
-            }
-
-        </script>
     </head>
 <body>
     <!-- !!!!!!!!!!!!!!!!!!!!!!!! -->
@@ -721,11 +37,9 @@
     <div data-role="page" id="viewCalendar">
 
         <div data-role="header">
-            <a href="#" data-role="button">Today</a>
-
-            <h1>Calendar</h1>
-            <a href="#viewAddShift" id="actionAddShift" data-transition="slideup" data-icon="nf-plus" data-iconpos="notext"
-               data-role="button">Add</a>
+            <a href="#" data-role="button"><div id="lblViewCalendarToday">Today</div></a>
+            <h1><div id="lblCalendar">Calendar</div></h1>
+            <a href="#viewAddShift" id="actionAddShift" data-transition="slideup" data-icon="nf-plus" data-iconpos="notext" data-role="button"><div id="lblViewCalendarAdd">Add</div></a>
         </div>
 
         <div data-role="content">
@@ -735,10 +49,10 @@
         <div data-role="footer" data-position="fixed">
             <div class="myNavBar" data-role="navbar" data-iconpos="top">
                 <ul class="">
-                    <li><a href="#viewCalendar" data-transition="none" data-icon="custom-calendar" class="ui-btn-active ui-state-persist custom-calendar">Calendar</a></li>
-                    <li id="actionCalendarViewReport"><a href="#viewReport" class="custom-report" data-transition="none" data-icon="custom-report">Report</a>
+                    <li><a href="#viewCalendar" data-transition="none" data-icon="custom-calendar" class="ui-btn-active ui-state-persist custom-calendar"><div id="lblViewCalendarFooterCalendar">Calendar</div></a></li>
+                    <li id="actionCalendarViewReport"><a href="#viewReport" class="custom-report" data-transition="none" data-icon="custom-report"><div id="lblViewCalendarFooterReport">Report</div></a>
                     </li>
-                    <li><a href="#viewSettings" class="custom-settings" data-transition="none" data-icon="custom-settings">Settings</a>
+                    <li><a href="#viewSettings" class="custom-settings" data-transition="none" data-icon="custom-settings"><div id="lblViewCalendarFooterSettings">Settings</div></a>
                     </li>
                 </ul>
             </div>
@@ -882,18 +196,18 @@
     <!-- !!!!!!!!!!!!!!!!!!!!!!!! -->
     <div data-role="page" id="viewReport" ng-controller="ReportCtrl">
         <div data-role="header" data-position="fixed" data-theme="a">
-            <h1>Report</h1>
+            <h1><div id="lblReport">Reports</div></h1>
             <div data-role="navbar">
                 <ul>
-                    <li id="itemReportWeekly"><a href="#" ng-click="reportWeekly()" data-role="button">Weekly</a></li>
-                    <li id="itemReportMonthly"><a href="#" ng-click="reportMonthly()" data-role="button">Monthly</a></li>
+                    <li id="itemReportWeekly"><a href="#" id="linkReportWeekly" ng-click="reportWeekly()" data-role="button">Weekly</a></li>
+                    <li id="itemReportMonthly"><a href="#" id="linkReportMonthly" ng-click="reportMonthly()" data-role="button">Monthly</a></li>
                 </ul>
             </div>
         </div>
 
         <div data-role="content" class="content">
             <div id="viewReportDetail">
-                <ul data-role="listview" data-theme="d" data-divider-theme="d" class="ui-listview">
+                <ul id="reportListview" data-role="listview" data-theme="d" data-divider-theme="d" class="ui-listview">
                     <div ng-repeat="report in reports">
                         <li data-role="list-divider" role="heading" class="ui-li ui-li-divider ui-bar-d ui-li-has-count">{{report.date}}</li>
                         <li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div" data-iconpos="right" data-theme="d" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-d">
@@ -906,7 +220,7 @@
             <div id="viewReportSummary">
                 <div style="margin-top:20px;">
                     <div class="text">This week</div>
-                    <ul data-role="listview" data-inset="true" style="margin-top:5px;">
+                    <ul id="reportSummaryWeekListview" data-role="listview" data-inset="true" style="margin-top:5px;">
                         <li data-icon="nf-arrow-r">
                             <report-detail report="reportsWeekly" />
                         </li>
@@ -915,7 +229,7 @@
 
                 <div style="margin-top:20px;">
                     <div class="text">This month</div>
-                    <ul data-role="listview" data-inset="true" style="margin-top:5px;">
+                    <ul id="reportSummaryMonthListview" data-role="listview" data-inset="true" style="margin-top:5px;">
                         <li data-icon="nf-arrow-r">
                             <report-detail report="reportsMonthly" />
                         </li>
@@ -927,10 +241,10 @@
         <div data-role="footer" data-position="fixed">
             <div class="myNavBar" data-role="navbar" data-iconpos="top">
                 <ul class="">
-                    <li><a href="#viewCalendar" class="custom-calendar" data-transition="none" data-icon="custom-calendar">Calendar</a>
+                    <li><a href="#viewCalendar" class="custom-calendar" data-transition="none" data-icon="custom-calendar"><div id="lblViewReportFooterCalendar">Calendar</div></a>
                     </li>
-                    <li><a href="#viewReport" id="actionReportViewReport" ng-click="reportSummary()" data-transition="none" data-icon="custom-report" class="ui-btn-active ui-state-persist custom-report">Report</a></li>
-                    <li><a href="#viewSettings" class="custom-settings" data-transition="none" data-icon="custom-settings">Settings</a>
+                    <li><a href="#viewReport" id="actionReportViewReport" ng-click="reportSummary()" data-transition="none" data-icon="custom-report" class="ui-btn-active ui-state-persist custom-report"><div id="lblViewReportFooterReport">Report</div></a></li>
+                    <li><a href="#viewSettings" class="custom-settings" data-transition="none" data-icon="custom-settings"><div id="lblViewReportFooterSettings">Settings</div></a>
                     </li>
                 </ul>
             </div>
@@ -951,7 +265,7 @@
         <div data-role="content" class="content">
             <ul data-role="listview" data-inset="true">
                 <li data-icon="nf-arrow-r"><a href="#viewMealVoucher" data-transition="slide"
-                                              id="actionSettingsEditMealVoucher">Meal Voucher
+                                              id="actionSettingsEditMealVoucher"><span id="lblViewSettingsMealVoucher">Meal Voucher</span>
                     <div id="lblSettingsMealVoucher" style="float:right;font-weight:normal;color:blue;"></div>
                 </a></li>
                 <li data-icon="false" id="actionSettingsEditHourlyRate"><a href="#">
@@ -987,11 +301,11 @@
         <div data-role="footer" data-position="fixed">
             <div class="myNavBar" data-role="navbar" data-iconpos="top">
                 <ul class="">
-                    <li><a href="#viewCalendar" class="custom-calendar" data-transition="none" data-icon="custom-calendar">Calendar</a>
+                    <li><a href="#viewCalendar" class="custom-calendar" data-transition="none" data-icon="custom-calendar"><div id="lblViewSettingsFooterCalendar">Calendar</div></a>
                     </li>
-                    <li><a href="#viewReport" class="custom-report" data-transition="none" data-icon="custom-report">Report</a>
+                    <li><a href="#viewReport" id="actionSettingsViewReport" class="custom-report" data-transition="none" data-icon="custom-report"><div id="lblViewSettingsFooterReport">Report</div></a>
                     </li>
-                    <li><a href="#viewSettings" data-transition="none" data-icon="custom-settings" class="ui-btn-active ui-state-persist custom-settings">Settings</a></li>
+                    <li><a href="#viewSettings" data-transition="none" data-icon="custom-settings" class="ui-btn-active ui-state-persist custom-settings"><div id="lblViewSettingsFooterSettings">Settings</div></a></li>
                 </ul>
             </div>
         </div>

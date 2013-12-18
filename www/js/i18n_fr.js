@@ -1,12 +1,21 @@
-	var i18n_dict_fr = { 
-		"main.title"  : "Calendrier",
+	var i18n_dict_fr = {
+
+        "main.title"  : "iTimeSheet",
+        "main.calendar"  : "Calendrier",
+        "main.report"  : "Rapports",
 		"main.settings" : "Réglages",
-		
+
+        // Calendar
 		"calendar.button.today"  : "Aujourd'hui",
-		
-		
+        "calendar.button.add"  : "Ajouter",
+
+        // Report
+
+
 		
 		// Settings
+        "settings.mealvoucher"  : "Panier",
+
 		"settings.language.en" : "Anglais",
 		"settings.language.fr" : "Français",
 		
@@ -23,7 +32,6 @@
 		// Messages
         "msg.shift.already.exist" : "Creneaux déjà existant pour ce jour!",
         "msg.shift.field.error" : "Erreur dans le données entrées!",
-
 		"msg.warning.language" : "La langue sera prise en compte au prochain redémarrage"
 	};
 	

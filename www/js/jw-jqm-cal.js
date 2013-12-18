@@ -213,7 +213,7 @@
             return totalHoursDay + "h" + (totalMinutesDay > 9 ? totalMinutesDay : "0" + totalMinutesDay);
         }
 
-        function timeDiff(first, second) {
+        function timeDiff(first, second, onlyMinute) {
             if (second === "") {
                 second = "00:00";
             }
@@ -229,8 +229,17 @@
             var td = time2 - time1,
                 hours = parseInt((td / 3600), 10),
                 minutes = parseInt(((td - hours * 3600) / 60), 10),
-                diff = ((hours < 10 && hours >= 0) ? ('0' + hours) : hours) + ':' + ((minutes < 10 && minutes >= 0) ? ('0' + minutes) : minutes);
-            return (diff);
+                diff = ((hours < 10 && hours >= 0) ? ('0' + hours) : hours) + ':' + ((minutes < 10 && minutes >= 0) ? ('0' + minutes) : minutes),
+                diffMinute = hours * 60 + minutes;
+
+            if (onlyMinute)
+            {
+                return (diffMinute);
+            }
+            else
+            {
+                return (diff);
+            }
         }
 
         $element.bind('change', function (event, begin) {
@@ -242,15 +251,18 @@
             for (var i = 0, events; events = plugin.settings.events[i]; i++) {
                 if (events[plugin.settings.day] < end && events[plugin.settings.day] >= begin) {
                     // Append matches to list
-                    var totalHoursAM = timeDiff(events[plugin.settings.beginAM], events[plugin.settings.endAM]);
-                    var totalHoursPM = timeDiff(events[plugin.settings.beginPM], events[plugin.settings.endPM]);
+                    var totalHoursAM = timeDiff(events[plugin.settings.beginAM], events[plugin.settings.endAM], false);
+                    var totalHoursPM = timeDiff(events[plugin.settings.beginPM], events[plugin.settings.endPM], false);
 
                     var dailyHoursWorkedAM = "<img src='img/chrono.png' width='22' height='22'/><span>" + events[plugin.settings.beginAM] + " - " + events[plugin.settings.endAM] + "</span>";
                     var dailyHoursWorkedPM = "<img src='img/chrono.png' width='22' height='22'/><span>" + (totalHoursPM === "00:00" ? "" : (events[plugin.settings.beginPM] + " - " + events[plugin.settings.endPM])) + "</span>";
 
+                    var lunchBreak = timeDiff(events[plugin.settings.endAM], events[plugin.settings.beginPM], true);
+                    var dailyHoursWorkedMealVoucher = lunchBreak <= plugin.settings.prefMealVoucher ? "<div class='singleton'><img src='img/burger.png' width='32' height='32' /></div>" : "";
+
                     var dailyHoursWorked = "<div class='detailTimeSheet'><div style='float:left;'>" +
                         dailyHoursWorkedAM + "<br/>" + dailyHoursWorkedPM +
-                        "</div><div class='singleton'><img src='img/burger.png' width='32' height='32' /></div><div class='singleton'>" + addDuration(totalHoursAM, totalHoursPM) + "</div></div>";
+                        "</div>" + dailyHoursWorkedMealVoucher + "<div class='singleton'>" + addDuration(totalHoursAM, totalHoursPM) + "</div></div>";
                     $("<li data-swipeurl='#' data-icon='false'><a href='#'>" + dailyHoursWorked + "</a></li>").appendTo($listview);
 
                     $('#swipeMe li').swipeDelete({
