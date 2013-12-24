@@ -1,20 +1,63 @@
 	var i18n_dict_fr = {
 
         "main.title"  : "iTimeSheet",
+
+        // Title
         "main.calendar"  : "Calendrier",
+        "main.calendar.addshift"  : "Ajouter ...",
+        "main.calendar.editshift"  : "Date",
+        "main.calendar.editmorning"  : "Matin",
+        "main.calendar.editafternoon"  : "Aprés-midi",
         "main.report"  : "Rapports",
 		"main.settings" : "Réglages",
+        "main.settings.language" : "Langue",
+        "main.settings.mealvoucher" : "Panier",
+        "main.settings.devise" : "Devise",
+        "main.settings.extrahourspolicy" : "Heures Supp.",
+
+        // Common
+        "common.cancel"  : "Annuler",
+        "common.done"  : "Valider",
 
         // Calendar
 		"calendar.button.today"  : "Aujourd'hui",
         "calendar.button.add"  : "Ajouter",
 
+        // Calendar - Add shift
+        "calendar.addshift.date"  : "Date",
+        "calendar.addshift.morning"  : "Matin",
+        "calendar.addshift.afternoon"  : "Aprés-midi",
+        "calendar.addshift.am.starts"  : "Début",
+        "calendar.addshift.am.ends"  : "Fin",
+        "calendar.addshift.pm.starts"  : "Début",
+        "calendar.addshift.pm.ends"  : "Fin",
+
+        // Calendar - Edit shift
+        "calendar.editshift.date"  : "Date",
+
+        // Calendar - Edit morning
+        "calendar.editmorning.starts"  : "Début",
+        "calendar.editmorning.ends"  : "Fin",
+        "calendar.editmorning.worked"  : "Travaillé?",
+
+        // Calendar - Edit afternoon
+        "calendar.editafternoon.starts"  : "Début",
+        "calendar.editafternoon.ends"  : "Fin",
+        "calendar.editafternoon.worked"  : "Travaillé?",
+
         // Report
+        "report.weekly"  : "Hebdomadaire",
+        "report.monthly"  : "Mensuel",
+        "report.thisweek"  : "Cette semaine",
+        "report.thismonth"  : "Ce mois",
 
-
-		
 		// Settings
         "settings.mealvoucher"  : "Panier",
+        "settings.hourlyrate"  : "Taux Horaire",
+        "settings.devise"  : "Devise",
+        "settings.extrahourspolicy"  : "Heures Supp.",
+        "settings.language"  : "Langue",
+        "settings.version"  : "Version",
 
 		"settings.language.en" : "Anglais",
 		"settings.language.fr" : "Français",
@@ -27,7 +70,11 @@
 		"settings.devise.euro" : "€ (Euro)", 
 		"settings.devise.pound" : "£ (Livre)", 
 		"settings.devise.dollar" : "$ (Dollar)", 
-		"settings.devise.yen" : "¥ (Yen/Yuan)", 
+		"settings.devise.yen" : "¥ (Yen/Yuan)",
+
+        "settings.extrahourspolicy.level1" : "Niveau 1",
+        "settings.extrahourspolicy.level2" : "Niveau 2",
+        "settings.extrahourspolicy.level3" : "Niveau 3",
 
 		// Messages
         "msg.shift.already.exist" : "Creneaux déjà existant pour ce jour!",

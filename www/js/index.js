@@ -270,28 +270,79 @@ function doTranslation()
         refreshCalendar();
     }
 
-    // Calendar view
-    $('#lblCalendar').text($.i18n._('main.calendar'));
+    // Calendar View
+    $('#lblViewCalendarTitle').text($.i18n._('main.calendar'));
     $('#lblViewCalendarToday').text($.i18n._('calendar.button.today'));
     $('#lblViewCalendarAdd').text($.i18n._('calendar.button.add'));
 
+    // Common
+    $('#lblViewAddShiftCancel, #lblViewEditShiftCancel, #lblViewEditMorningCancel, #lblViewEditAfternoonCancel').text($.i18n._('common.cancel'));
+    $('#lblViewAddShiftDone, #lblViewEditShiftDone, #lblViewEditMorningDone, #lblViewEditAfternoonDone').text($.i18n._('common.done'));
+
+    // Calendar View - Add Shift
+    $('#lblViewAddShiftTitle').text($.i18n._('main.calendar.addshift'));
+    $('#lblViewAddShiftDate').text($.i18n._('calendar.addshift.date'));
+    $('#lblViewAddShiftMorning').text($.i18n._('calendar.addshift.morning'));
+    $('#lblViewAddShiftAfternoon').text($.i18n._('calendar.addshift.afternoon'));
+    $('#lblViewAddShiftAMStarts').text($.i18n._('calendar.addshift.am.starts'));
+    $('#lblViewAddShiftAMEnds').text($.i18n._('calendar.addshift.am.ends'));
+    $('#lblViewAddShiftPMStarts').text($.i18n._('calendar.addshift.pm.starts'));
+    $('#lblViewAddShiftPMEnds').text($.i18n._('calendar.addshift.pm.ends'));
+
+    // Calendar View - Edit Shift
+    $('#lblViewEditShiftTitle').text($.i18n._('main.calendar.editshift'));
+    $('#lblViewEditShiftDate').text($.i18n._('calendar.editshift.date'));
+
+    // Calendar View - Edit Morning
+    $('#lblViewEditMorningTitle').text($.i18n._('main.calendar.editmorning'));
+    $('#lblViewEditMorningStarts').text($.i18n._('calendar.editmorning.starts'));
+    $('#lblViewEditMorningEnds').text($.i18n._('calendar.editmorning.ends'));
+    $('#lblViewEditMorningWorked').text($.i18n._('calendar.editmorning.worked'));
+
+    // Calendar View - Edit Afternoon
+    $('#lblViewEditAfternoonTitle').text($.i18n._('main.calendar.editafternoon'));
+    $('#lblViewEditAfternoonStarts').text($.i18n._('calendar.editafternoon.starts'));
+    $('#lblViewEditAfternoonEnds').text($.i18n._('calendar.editafternoon.ends'));
+    $('#lblViewEditAfternoonWorked').text($.i18n._('calendar.editafternoon.worked'));
+
+    // Footer
     $('#lblViewCalendarFooterCalendar, #lblViewReportFooterCalendar, #lblViewSettingsFooterCalendar').text($.i18n._('main.calendar'));
     $('#lblViewCalendarFooterReport, #lblViewReportFooterReport, #lblViewSettingsFooterReport').text($.i18n._('main.report'));
     $('#lblViewCalendarFooterSettings, #lblViewReportFooterSettings, #lblViewSettingsFooterSettings').text($.i18n._('main.settings'));
 
-
     // Report View
-    $('#lblReport').text($.i18n._('main.report'));
+    $('#lblViewReportTitle').text($.i18n._('main.report'));
+    $('#lblViewReportWeekly').text($.i18n._('report.weekly'));
+    $('#lblViewReportMonthly').text($.i18n._('report.monthly'));
+    $('#lblViewReportThisWeek').text($.i18n._('report.thisweek'));
+    $('#lblViewReportThisMonth').text($.i18n._('report.thismonth'));
 
     // Settings View
-    $('#lblSettings').text($.i18n._('main.settings'));
-
+    $('#lblViewSettingsTitle').text($.i18n._('main.settings'));
     $('#lblViewSettingsMealVoucher').text($.i18n._('settings.mealvoucher'));
+    $('#lblViewSettingsHourlyRate').text($.i18n._('settings.hourlyrate'));
+    $('#lblViewSettingsDevise').text($.i18n._('settings.devise'));
+    $('#lblViewSettingsExtraHoursPolicy').text($.i18n._('settings.extrahourspolicy'));
+    $('#lblViewSettingsLanguage').text($.i18n._('settings.language'));
+    $('#lblViewSettingsVersion').text($.i18n._('settings.version'));
 
-
+    // Settings View - Language
+    $('#lblViewLanguageTitle').text($.i18n._('main.settings.language'));
     $('#lblSettingsLanguage').text($.i18n._('settings.language.' + prefLanguage));
+
+    // Settings View - Meal Voucher
+    $('#lblViewMealVoucherTitle').text($.i18n._('main.settings.mealvoucher'));
     $('#lblSettingsMealVoucher').text($.i18n._('settings.mealvoucher.' + prefMealVoucher));
+
+    // Settings View - Devise
+    $('#lblViewDeviseTitle').text($.i18n._('main.settings.devise'));
     $('#lblSettingsDevise').text($.i18n._('settings.devise.' + prefDevise));
+
+    // Settings View - Extra Hours Policy
+    $('#lblViewExtraHoursPolicyTitle').text($.i18n._('main.settings.extrahourspolicy'));
+    $('#lblViewExtraHoursPolicyLevel1').text($.i18n._('settings.extrahourspolicy.level1'));
+    $('#lblViewExtraHoursPolicyLevel2').text($.i18n._('settings.extrahourspolicy.level2'));
+    $('#lblViewExtraHoursPolicyLevel3').text($.i18n._('settings.extrahourspolicy.level3'));
 }
 
 function createjscssfile(filename, filetype){
