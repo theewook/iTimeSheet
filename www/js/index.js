@@ -13,7 +13,7 @@ var events = [];
 
 function createDB(tx)
 {
-    tx.executeSql('DROP TABLE IF EXISTS EVENTS');
+//    tx.executeSql('DROP TABLE IF EXISTS EVENTS');
 //    tx.executeSql('DROP TABLE IF EXISTS PREFS');
     tx.executeSql('CREATE TABLE IF NOT EXISTS EVENTS (id UNIQUE, date, week, month, beginAM, endAM, beginPM, endPM)');
     //			     tx.executeSql('INSERT INTO EVENTS (id, beginAM, endAM, beginPM, endPM) VALUES (20130818, "08:30", "12:30", "13:00", "18:30")');
@@ -213,7 +213,7 @@ function addShift(dateId, beginAM, endAM, beginPM, endPM)
 
                 var date = new Date(year, month, day);
                 var dateFormatted = year + "-" + month + "-" + day;
-                var week = date.getWeekOfYear();
+                var week = moment(date).weeks();
 
                 var sql = 'INSERT INTO EVENTS ("id", "date", "week", "month", "beginAM", "endAM", "beginPM", "endPM") VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
                 tx.executeSql(sql, [dateId, dateFormatted, week, month, beginAM, endAM, beginPM, endPM], function querySuccess(tx, results) {
