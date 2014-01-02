@@ -199,11 +199,11 @@ function ReportCtrl($scope)
 
 function getDateRangeOfWeek(date)
 {
-    date.addMonths(1);
-    if (date.getMonth() == 0)
-    {
-       date.addYears(-1);
-    }
+    date.addMonths(-1);
+//    if (date.getMonth() == 0)
+//    {
+//       date.addYears(-1);
+//    }
 
     var firstDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1)).clearTime();
     var lastDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1 + 6)).clearTime();
@@ -214,11 +214,11 @@ function getDateRangeOfWeek(date)
 
 function getDateRangeOfMonth(date)
 {
-    date.addMonths(1);
-    if (date.getMonth() == 0)
-    {
-        date.addYears(-1);
-    }
+    date.addMonths(-1);
+//    if (date.getMonth() == 0)
+//    {
+//        date.addYears(-1);
+//    }
 
     var lib = date.toString("MMMM yyyy");
     return lib;
