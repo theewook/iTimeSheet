@@ -272,7 +272,7 @@
                         btnClass: 'aSwipeBtn',
                         click: function (e) {
                             e.preventDefault();
-                            var dateId = begin.getFullYear() + "" + begin.getMonth() + "" + begin.getDate();
+                            var dateId = begin.getFullYear() + "" + (begin.getMonth() < 10 ? "0" + begin.getMonth() : begin.getMonth()) + "" + (begin.getDate() < 10 ? "0" + begin.getDate() : begin.getDate());
                             plugin.settings.index.deleteShift(dateId);
                             $(this).parents('li').slideUp();
                         }

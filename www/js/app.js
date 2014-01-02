@@ -255,11 +255,12 @@ $(document).ready(function ()
     // Validate add shift
     $('#actionDoneAddShift').click(function ()
     {
-        var dateId = Date.parse(dateShift).toString("yyyyMMdd");
+        var dateId = moment(dateShift, "DD MMMM YYYY").format("YYYYMMDD");
+//        var dateId = Date.parse(dateShift).toString("yyyyMMdd");
         var dateIdYY = dateId.substr(0,4);
         var dateIdMM = dateId.substr(4,2);
         var dateIdDD = dateId.substr(6,2);
-        var id = dateIdYY + ((dateIdMM - 1) < 10 ? ("0" + (dateIdMM - 1)) : (dateIdMM - 1)) + dateIdDD;
+        var id = dateIdYY + (dateIdMM - 1 < 10 ? ("0" + (dateIdMM - 1)) : (dateIdMM - 1)) + dateIdDD;
 
         if ($('#sliderWorkedMorningShift').val() === 'yes' && $('#sliderWorkedAfternoonShift').val() === 'yes')
         {

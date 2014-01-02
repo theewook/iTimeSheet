@@ -1,3 +1,6 @@
+moment().format();
+moment.lang('fr'); // 'fr'
+
 // Wait for PhoneGap to load
 document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -10,8 +13,8 @@ var events = [];
 
 function createDB(tx)
 {
-//                tx.executeSql('DROP TABLE IF EXISTS EVENTS');
-    //tx.executeSql('DROP TABLE IF EXISTS PREFS');
+    tx.executeSql('DROP TABLE IF EXISTS EVENTS');
+//    tx.executeSql('DROP TABLE IF EXISTS PREFS');
     tx.executeSql('CREATE TABLE IF NOT EXISTS EVENTS (id UNIQUE, date, week, month, beginAM, endAM, beginPM, endPM)');
     //			     tx.executeSql('INSERT INTO EVENTS (id, beginAM, endAM, beginPM, endPM) VALUES (20130818, "08:30", "12:30", "13:00", "18:30")');
     //			     tx.executeSql('INSERT INTO EVENTS (id, beginAM, endAM, beginPM, endPM) VALUES (20130816, "08:00", "10:00", "14:00", "15:00")');
@@ -176,7 +179,7 @@ function deleteShift(dateId)
                     for (var i = 0; i < events.length; i++)
                     {
                         var dateEvent = events[i].day;
-                        var curDateId = dateEvent.getFullYear() + "" + dateEvent.getMonth() + "" + dateEvent.getDate();
+                        var curDateId = dateEvent.getFullYear() + "" + (dateEvent.getMonth() < 10 ? "0" + dateEvent.getMonth() : dateEvent.getMonth()) + "" + (dateEvent.getDate() < 10 ? "0" + dateEvent.getDate() : dateEvent.getDate());
 
                         if (curDateId === dateId)
                         {
@@ -185,7 +188,7 @@ function deleteShift(dateId)
                         }
                     }
                     refreshCalendar();
-                }, errorDB)
+                }, errorDB);
             }
         }, errorDB);
     }, errorDB);
@@ -216,7 +219,7 @@ function addShift(dateId, beginAM, endAM, beginPM, endPM)
                 tx.executeSql(sql, [dateId, dateFormatted, week, month, beginAM, endAM, beginPM, endPM], function querySuccess(tx, results) {
                     loadAllEvent();
                     $.mobile.changePage("#viewCalendar", { transition: "slidedown", reverse: false, changeHash: false });
-                }, errorDB)
+                }, errorDB);
             }
             else
             {

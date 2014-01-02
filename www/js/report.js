@@ -12,7 +12,7 @@ function ReportCtrl($scope)
 
         db.transaction(function query(tx)
         {
-            var sql = "SELECT * FROM EVENTS ORDER BY date DESC";
+            var sql = "SELECT * FROM EVENTS ORDER BY id DESC";
             tx.executeSql(sql, [], function querySuccess(tx, results)
             {
                 var len = results.rows.length;
@@ -71,7 +71,7 @@ function ReportCtrl($scope)
 
         db.transaction(function query(tx)
         {
-            var sql = "SELECT * FROM EVENTS ORDER BY date DESC";
+            var sql = "SELECT * FROM EVENTS ORDER BY id DESC";
             tx.executeSql(sql, [], function querySuccess(tx, results)
             {
                 var len = results.rows.length;
