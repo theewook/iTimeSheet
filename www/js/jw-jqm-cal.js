@@ -67,6 +67,14 @@
             $table.appendTo($element);
             $listview = $("<ul id='swipeMe' data-role='listview'/>").insertAfter($table);
 
+            $($table).on( "swipeleft swiperight", function( e ) {
+                if ( e.type === "swipeleft"  ) {
+                    refresh(new Date(plugin.settings.date.getFullYear(), plugin.settings.date.getMonth() + 1, plugin.settings.date.getDate()));
+                } else if ( e.type === "swiperight" ) {
+                    refresh(new Date(plugin.settings.date.getFullYear(), plugin.settings.date.getMonth() - 1, plugin.settings.date.getDate()));
+                }
+            });
+
             // Call refresh to fill the calendar with dates
             refresh(plugin.settings.date);
         }
