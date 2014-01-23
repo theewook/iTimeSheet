@@ -274,6 +274,10 @@ $(document).ready(function ()
                 addShift(id, beginShiftAM, endShiftAM, beginShiftPM, endShiftPM);
             }
         }
+        else
+        {
+            addShift(id, beginShiftAM, endShiftAM, beginShiftPM, endShiftPM);
+        }
     });
 
     // Validate date shift

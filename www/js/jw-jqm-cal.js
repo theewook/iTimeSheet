@@ -262,11 +262,11 @@
                     var totalHoursAM = timeDiff(events[plugin.settings.beginAM], events[plugin.settings.endAM], false);
                     var totalHoursPM = timeDiff(events[plugin.settings.beginPM], events[plugin.settings.endPM], false);
 
-                    var dailyHoursWorkedAM = "<img src='img/chrono.png' width='22' height='22'/><span>" + events[plugin.settings.beginAM] + " - " + events[plugin.settings.endAM] + "</span>";
+                    var dailyHoursWorkedAM = "<img src='img/chrono.png' width='22' height='22'/><span>" + (totalHoursAM === "00:00" ? "" : events[plugin.settings.beginAM] + " - " + events[plugin.settings.endAM]) + "</span>";
                     var dailyHoursWorkedPM = "<img src='img/chrono.png' width='22' height='22'/><span>" + (totalHoursPM === "00:00" ? "" : (events[plugin.settings.beginPM] + " - " + events[plugin.settings.endPM])) + "</span>";
 
                     var lunchBreak = timeDiff(events[plugin.settings.endAM], events[plugin.settings.beginPM], true);
-                    var dailyHoursWorkedMealVoucher = lunchBreak < plugin.settings.prefMealVoucher ? "<div class='singleton'><img src='img/burger.png' width='32' height='32' /></div>" : "";
+                    var dailyHoursWorkedMealVoucher = (totalHoursAM !== "00:00" && totalHoursPM !== "00:00" && lunchBreak < plugin.settings.prefMealVoucher) ? "<div class='singleton'><img src='img/burger.png' width='32' height='32' /></div>" : "";
 
                     var dailyHoursWorked = "<div class='detailTimeSheet'><div style='float:left;'>" +
                         dailyHoursWorkedAM + "<br/>" + dailyHoursWorkedPM +

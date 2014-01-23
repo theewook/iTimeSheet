@@ -40,7 +40,7 @@ function ReportCtrl($scope)
                     var beginPM = results.rows.item(i).beginPM;
                     var endPM = results.rows.item(i).endPM;
 
-                    if (timeDiff(endAM, beginPM, true) < prefMealVoucher)
+                    if (timeDiff(endAM, beginAM, true) !== 0 && timeDiff(endPM, beginPM, true) !== 0 && timeDiff(endAM, beginPM, true) < prefMealVoucher)
                     {
                         totalMealVoucher++;
                     }
@@ -99,7 +99,7 @@ function ReportCtrl($scope)
                     var beginPM = results.rows.item(i).beginPM;
                     var endPM = results.rows.item(i).endPM;
 
-                    if (timeDiff(endAM, beginPM, true) < prefMealVoucher)
+                    if (timeDiff(endAM, beginAM, true) !== 0 && timeDiff(endPM, beginPM, true) !== 0 && timeDiff(endAM, beginPM, true) < prefMealVoucher)
                     {
                         totalMealVoucher++;
                     }
@@ -152,7 +152,7 @@ function ReportCtrl($scope)
                     var beginPM = results.rows.item(i).beginPM;
                     var endPM = results.rows.item(i).endPM;
 
-                    if (timeDiff(endAM, beginPM, true) < prefMealVoucher)
+                    if (timeDiff(endAM, beginAM, true) !== 0 && timeDiff(endPM, beginPM, true) !== 0 && timeDiff(endAM, beginPM, true) < prefMealVoucher)
                     {
                         totalMealVoucher++;
                     }
@@ -181,7 +181,7 @@ function ReportCtrl($scope)
                     var beginPM = results.rows.item(i).beginPM;
                     var endPM = results.rows.item(i).endPM;
 
-                    if (timeDiff(endAM, beginPM, true) < prefMealVoucher)
+                    if (timeDiff(endAM, beginAM, true) !== 0 && timeDiff(endPM, beginPM, true) !== 0 && timeDiff(endAM, beginPM, true) < prefMealVoucher)
                     {
                         totalMealVoucher++;
                     }
