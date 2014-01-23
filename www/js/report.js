@@ -23,7 +23,7 @@ function ReportCtrl($scope)
 
                 for (var i = 0; i < len; i++)
                 {
-                    var date = results.rows.item(i).date;
+                    var date = getDateFromDB(results.rows.item(i).date);
                     var week = results.rows.item(i).week;
 
                     if (i > 0 && curWeek != week)
@@ -40,7 +40,7 @@ function ReportCtrl($scope)
                     var beginPM = results.rows.item(i).beginPM;
                     var endPM = results.rows.item(i).endPM;
 
-                    if (timeDiff(endAM, beginPM, true) <= prefMealVoucher)
+                    if (timeDiff(endAM, beginPM, true) < prefMealVoucher)
                     {
                         totalMealVoucher++;
                     }
@@ -82,7 +82,7 @@ function ReportCtrl($scope)
 
                 for (var i = 0; i < len; i++)
                 {
-                    var date = results.rows.item(i).date;
+                    var date = getDateFromDB(results.rows.item(i).date);
                     var month = results.rows.item(i).month;
 
                     if (i > 0 && curMonth != month)
@@ -99,7 +99,7 @@ function ReportCtrl($scope)
                     var beginPM = results.rows.item(i).beginPM;
                     var endPM = results.rows.item(i).endPM;
 
-                    if (timeDiff(endAM, beginPM, true) <= prefMealVoucher)
+                    if (timeDiff(endAM, beginPM, true) < prefMealVoucher)
                     {
                         totalMealVoucher++;
                     }
@@ -128,18 +128,18 @@ function ReportCtrl($scope)
         $scope.reportsMonthly = {};
 
         var date = new Date(), y = date.getFullYear(), m = date.getMonth();
-        var firstDayOfMonth = new Date(y, m, 1).addMonths(-1);
-        var lastDayOfMonth = new Date(y, m + 1, 0).addMonths(-1);
+        var firstDayOfMonth = new Date(y, m, 1);
+        var lastDayOfMonth = new Date(y, m + 1, 0);
 
-        var firstDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1)).addMonths(-1).clearTime();
-        var lastDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1 + 6)).addMonths(-1).clearTime();
+        var firstDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1)).clearTime();
+        var lastDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1 + 6)).clearTime();
 
         var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
 
         db.transaction(function query(tx)
         {
-            var sql = "SELECT * FROM EVENTS WHERE date(date) BETWEEN ? AND ?";
-            tx.executeSql(sql, [firstDayOfWeek.toString("yyyy-MM-dd"), lastDayOfWeek.toString("yyyy-MM-dd")], function querySuccess(tx, results)
+            var sql = "SELECT * FROM EVENTS WHERE date BETWEEN ? AND ?";
+            tx.executeSql(sql, [getDateForSQL(firstDayOfWeek.toString("yyyy-MM-dd")), getDateForSQL(lastDayOfWeek.toString("yyyy-MM-dd"))], function querySuccess(tx, results)
             {
                 var len = results.rows.length;
                 var totalHours = 0;
@@ -152,7 +152,7 @@ function ReportCtrl($scope)
                     var beginPM = results.rows.item(i).beginPM;
                     var endPM = results.rows.item(i).endPM;
 
-                    if (timeDiff(endAM, beginPM, true) <= prefMealVoucher)
+                    if (timeDiff(endAM, beginPM, true) < prefMealVoucher)
                     {
                         totalMealVoucher++;
                     }
@@ -167,8 +167,8 @@ function ReportCtrl($scope)
 
         db.transaction(function query(tx)
         {
-            var sql = "SELECT * FROM EVENTS WHERE date(date) BETWEEN ? AND ?";
-            tx.executeSql(sql, [firstDayOfMonth.toString("yyyy-MM-dd"), lastDayOfMonth.toString("yyyy-MM-dd")], function querySuccess(tx, results)
+            var sql = "SELECT * FROM EVENTS WHERE date BETWEEN ? AND ?";
+            tx.executeSql(sql, [getDateForSQL(firstDayOfMonth.toString("yyyy-MM-dd")), getDateForSQL(lastDayOfMonth.toString("yyyy-MM-dd"))], function querySuccess(tx, results)
             {
                 var len = results.rows.length;
                 var totalHours = 0;
@@ -181,7 +181,7 @@ function ReportCtrl($scope)
                     var beginPM = results.rows.item(i).beginPM;
                     var endPM = results.rows.item(i).endPM;
 
-                    if (timeDiff(endAM, beginPM, true) <= prefMealVoucher)
+                    if (timeDiff(endAM, beginPM, true) < prefMealVoucher)
                     {
                         totalMealVoucher++;
                     }
@@ -197,16 +197,30 @@ function ReportCtrl($scope)
     };
 }
 
+function getDateForSQL(date)
+{
+    var dateSplit = date.split('-');
+    var year = dateSplit[0];
+    var month = dateSplit[1];
+    var day = dateSplit[2];
+
+    return year + "-" + (month - 1 < 10 ? "0" + (month - 1) : month - 1) + "-" + day;
+}
+
+function getDateFromDB(date)
+{
+    var dateSplit = date.split('-');
+    var year = dateSplit[0];
+    var month = parseInt(dateSplit[1], 10);
+    var day = dateSplit[2];
+
+    return year + "-" + (month + 1 < 10 ? "0" + (month + 1) : month + 1) + "-" + day;
+}
+
 function getDateRangeOfWeek(date)
 {
-    date.addMonths(-1);
-//    if (date.getMonth() == 0)
-//    {
-//       date.addYears(-1);
-//    }
-
-    var firstDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1)).clearTime();
-    var lastDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1 + 6)).clearTime();
+    var firstDayOfWeek = new Date(date.setDate(date.getDate() - (date.getDay() + 6) % 7 )).clearTime();
+    var lastDayOfWeek = new Date(date.setDate(date.getDate() - (date.getDay() + 6) % 7 + 6)).clearTime();
 
     var lib = firstDayOfWeek.toString("dd MMMM yyyy") + " - " + lastDayOfWeek.toString("dd MMMM yyyy");
     return lib;
@@ -214,12 +228,6 @@ function getDateRangeOfWeek(date)
 
 function getDateRangeOfMonth(date)
 {
-    date.addMonths(-1);
-//    if (date.getMonth() == 0)
-//    {
-//        date.addYears(-1);
-//    }
-
     var lib = date.toString("MMMM yyyy");
     return lib;
 }

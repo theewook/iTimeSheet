@@ -256,7 +256,7 @@ $(document).ready(function ()
     $('#actionDoneAddShift').click(function ()
     {
         var dateId = moment(dateShift, "DD MMMM YYYY").format("YYYYMMDD");
-//        var dateId = Date.parse(dateShift).toString("yyyyMMdd");
+        //var dateId = Date.parse(dateShift).toString("yyyyMMdd");
         var dateIdYY = dateId.substr(0,4);
         var dateIdMM = dateId.substr(4,2);
         var dateIdDD = dateId.substr(6,2);
@@ -322,10 +322,16 @@ $(document).ready(function ()
         }
     });
 
+    // Today
+    $('#actionToday').click(function ()
+    {
+        $("#calendar").trigger('refresh', [new Date()]);
+    });
+
     // Add a new shift
     $('#actionAddShift').click(function ()
     {
-        $('#lblDateShift').html(new Date().toString('dd MMMM yyyy'));
+        //$('#lblDateShift').html(new Date().toString('dd MMMM yyyy'));
         dateShift = $('#lblDateShift').text();
 
         // Morning
