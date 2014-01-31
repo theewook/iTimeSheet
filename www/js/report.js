@@ -49,7 +49,7 @@ function ReportCtrl($scope)
                     totalHours += timeDiff(beginPM, endPM, true);
 
                     curWeek = week;
-                    curDate = Date.parse(date);
+                    curDate = Date.parseExact(date, "yyyy-MM-dd");
 
                     if (i == len-1)
                     {
@@ -108,7 +108,7 @@ function ReportCtrl($scope)
                     totalHours += timeDiff(beginPM, endPM, true);
 
                     curMonth = month;
-                    curDate = Date.parse(date);
+                    curDate = Date.parseExact(date, "yyyy-MM-dd");
 
                     if (i == len-1)
                     {

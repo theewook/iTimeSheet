@@ -120,6 +120,7 @@
                 $td.addClass("hidden");
             } else {
                 var importance = 0;
+                var dailyHoursWorkedMealVoucher = "<span></span>";
 
                 // Find events for this date
                 for (var i = 0,
@@ -128,13 +129,27 @@
                          end = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1, 0, 0, 0, 0);
                      event = plugin.settings.events[i]; i++) {
                     if (event[plugin.settings.day] < end && event[plugin.settings.day] >= begin) {
-                        importance++;
-                        if (importance > 2) break;
+
+                        var totalHoursAM = timeDiff(event[plugin.settings.beginAM], event[plugin.settings.endAM], false);
+                        var totalHoursPM = timeDiff(event[plugin.settings.beginPM], event[plugin.settings.endPM], false);
+                        var totalHours = addDuration(totalHoursAM, totalHoursPM);
+                        var totalHoursSplit = totalHours.split('h');
+
+                        var lunchBreak = timeDiff(event[plugin.settings.endAM], event[plugin.settings.beginPM], true);
+                        dailyHoursWorkedMealVoucher = (totalHoursAM !== "00:00" && totalHoursPM !== "00:00" && lunchBreak < plugin.settings.prefMealVoucher) ? "<span>&bull;</span>" : "<span></span>";
+
+                        if (totalHoursSplit[0] >= 9) {
+                            importance = 3;
+                        } else if (totalHoursSplit[0] >= 8 && totalHoursSplit[0] < 9 && totalHoursSplit[1] > 0) {
+                            importance = 2;
+                        } else {
+                            importance = 1;
+                        }
                     }
                 }
 
                 if (importance > 0) {
-                    $a.append("<span>&bull;</span>").addClass("importance-" + importance.toString());
+                    $a.append(dailyHoursWorkedMealVoucher).addClass("importance-" + importance.toString());
                 }
             }
         }
