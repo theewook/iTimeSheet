@@ -1,14 +1,17 @@
 iTimeSheet
 ==========
 
-Version 1.4 (A venir)
+Version 1.5 (A venir)
 - Pouvoir editer un creneau horaire
-- Rapport au mois customisable
 - Ajout du taux horaire et de la devise dans les rapports
 - Nouvelles couleurs
 - Correction bugs
 
-Version 1.3 (Disponible)
+Version 1.4 (Disponible)
+- Rapport au mois customisable
+- Correction bugs
+
+Version 1.3
 - Nouveau logo
 - Correction bugs
 
