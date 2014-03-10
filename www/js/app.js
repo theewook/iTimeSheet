@@ -365,10 +365,19 @@ $(document).ready(function ()
         $('#actionReportViewReport').click();
     });
 
-    // Report Weekly
+    // Report Custom
+    $('#itemReportCustom').click(function ()
+    {
+        $('#viewReportSummary').hide();
+        $('#viewReportCustom').show();
+        $('#viewReportDetail').hide();
+    });
+
+    // Report Weekly/Monthly
     $('#itemReportWeekly, #itemReportMonthly').click(function ()
     {
         $('#viewReportSummary').hide();
+        $('#viewReportCustom').hide();
         $('#viewReportDetail').show();
     });
 
@@ -378,9 +387,11 @@ $(document).ready(function ()
         $('#actionReportViewReport').addClass('ui-btn-active');
         $('#linkReportWeekly').removeClass('ui-btn-active');
         $('#linkReportMonthly').removeClass('ui-btn-active');
+        $('#linkReportCustom').removeClass('ui-btn-active');
 
         $('#viewReportSummary').show();
         $('#viewReportDetail').hide();
+        $('#viewReportCustom').hide();
     });
 
     ///////////////////////////////////////////////////

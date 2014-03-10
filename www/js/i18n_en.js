@@ -48,8 +48,10 @@
         // Report
         "report.weekly"  : "Weekly",
         "report.monthly"  : "Monthly",
+        "report.custom"  : "Custom",
         "report.thisweek"  : "This week",
         "report.thismonth"  : "This month",
+        "report.btnReportCustom"  : "Calculate",
 
         // Settings
         "settings.mealvoucher"  : "Meal Voucher",

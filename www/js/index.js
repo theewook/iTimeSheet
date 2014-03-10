@@ -317,8 +317,10 @@ function doTranslation()
     $('#lblViewReportTitle').text($.i18n._('main.report'));
     $('#lblViewReportWeekly').text($.i18n._('report.weekly'));
     $('#lblViewReportMonthly').text($.i18n._('report.monthly'));
+    $('#lblViewReportCustom').text($.i18n._('report.custom'));
     $('#lblViewReportThisWeek').text($.i18n._('report.thisweek'));
     $('#lblViewReportThisMonth').text($.i18n._('report.thismonth'));
+    $('#lblBtnReportCustom').text($.i18n._('report.btnReportCustom'));
 
     // Settings View
     $('#lblViewSettingsTitle').text($.i18n._('main.settings'));

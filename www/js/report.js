@@ -3,6 +3,120 @@ function ReportCtrl($scope)
     $scope.reports = [];
     $scope.reportsWeekly = {};
     $scope.reportsMonthly = {};
+    $scope.reportCustom = {};
+
+    $scope.selectedYearFrom = moment(new Date()).year();
+    $scope.selectedWeekFrom = new Date(moment(moment(new Date()).weeks() + " ," + $scope.selectedYearFrom, "W ,GGGG")).toString("dd MMMM yyyy");
+    $scope.selectedYearTo = moment(new Date()).year();
+    $scope.selectedWeekTo = new Date(moment(moment(new Date()).weeks() + " ," + $scope.selectedYearTo, "W ,GGGG").add('days', 6)).toString("dd MMMM yyyy");
+
+    $scope.getReportCustom = function()
+    {
+        $scope.reportCustom = {};
+
+        var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
+
+        var startSearch = new Date(moment($scope.selectedWeekFrom));
+        var endSearch = new Date(moment($scope.selectedWeekTo));
+
+        db.transaction(function query(tx)
+        {
+            var sql = "SELECT * FROM EVENTS WHERE date BETWEEN ? AND ?";
+            tx.executeSql(sql, [getDateForSQL(startSearch.toString("yyyy-MM-dd")), getDateForSQL(endSearch.toString("yyyy-MM-dd"))], function querySuccess(tx, results)
+            {
+                var len = results.rows.length;
+                var totalHours = 0;
+                var totalMealVoucher = 0;
+                var arrReportWeek = new Array();
+                var curWeek;
+
+                for (var i = 0; i < len; i++)
+                {
+                    var beginAM = results.rows.item(i).beginAM;
+                    var endAM = results.rows.item(i).endAM;
+                    var beginPM = results.rows.item(i).beginPM;
+                    var endPM = results.rows.item(i).endPM;
+                    var week = results.rows.item(i).week;
+
+                    if (i > 0 && curWeek !== week)
+                    {
+                        arrReportWeek.push(calculate('', totalHours, totalMealVoucher));
+                        totalHours = 0;
+                        totalMealVoucher = 0;
+                    }
+
+                    if (timeDiff(endAM, beginAM, true) !== 0 && timeDiff(endPM, beginPM, true) !== 0 && timeDiff(endAM, beginPM, true) < prefMealVoucher)
+                    {
+                        totalMealVoucher++;
+                    }
+
+                    totalHours += timeDiff(beginAM, endAM, true);
+                    totalHours += timeDiff(beginPM, endPM, true);
+
+                    curWeek = week;
+
+                    if (i == len-1)
+                    {
+                        arrReportWeek.push(calculate('', totalHours, totalMealVoucher));
+                    }
+                }
+
+                var report = new Array();
+                report.totalHours = 0;
+                report.totalHoursLvl2 = 0;
+                report.totalHoursLvl3 = 0;
+                report.totalMealVoucher = 0;
+                for (var i = 0; i < arrReportWeek.length; i++)
+                {
+                    report.totalHours += arrReportWeek[i].totalHours;
+                    report.totalHoursLvl2 += arrReportWeek[i].totalHoursLvl2;
+                    report.totalHoursLvl3 += arrReportWeek[i].totalHoursLvl3;
+                    report.totalMealVoucher += arrReportWeek[i].totalMealVoucher;
+                }
+
+                $scope.reportCustom = formatReport(report);
+                $scope.$digest();
+            });
+        });
+    };
+
+    $scope.getWeeksFirstDay = function () {
+        var i, weeks = 53, res = [];
+
+        for (i = 1; i <= weeks; i++) {
+            var date = new Date(moment(i + " ," + $scope.selectedYearFrom, "W ,GGGG"));
+            var firstDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1)).clearTime();
+            var weekDetail = firstDayOfWeek.toString("dd MMMM yyyy");
+            res.push(weekDetail);
+        }
+
+        return res;
+    };
+
+    $scope.getWeeksLastDay = function () {
+        var i, weeks = 53, res = [];
+
+        for (i = 1; i <= weeks; i++) {
+            var date = new Date(moment(i + " ," + $scope.selectedYearTo, "W ,GGGG"));
+            var lastDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1 + 6)).clearTime();
+            var weekDetail = lastDayOfWeek.toString("dd MMMM yyyy");
+            res.push(weekDetail);
+        }
+
+        return res;
+    };
+
+    $scope.getYears = function () {
+        var i, res = [];
+        var startYear = 2013;
+        var endYear = moment(new Date()).year() + 1;
+
+        for (i = startYear; i <= endYear; i++) {
+            res.push(i);
+        }
+
+        return res;
+    };
 
     $scope.reportWeekly = function()
     {
@@ -28,7 +142,7 @@ function ReportCtrl($scope)
 
                     if (i > 0 && curWeek != week)
                     {
-                        newItems.push(calculate(getDateRangeOfWeek(curDate == -1 ? date : curDate), totalHours, totalMealVoucher));
+                        newItems.push(formatReport(calculate(getDateRangeOfWeek(curDate == -1 ? date : curDate), totalHours, totalMealVoucher)));
 
                         // Ready for the next week
                         totalHours = 0;
@@ -53,7 +167,7 @@ function ReportCtrl($scope)
 
                     if (i == len-1)
                     {
-                        newItems.push(calculate(getDateRangeOfWeek(curDate), totalHours, totalMealVoucher));
+                        newItems.push(formatReport(calculate(getDateRangeOfWeek(curDate), totalHours, totalMealVoucher)));
                     }
                 }
 
@@ -79,19 +193,44 @@ function ReportCtrl($scope)
                 var totalMealVoucher = 0;
                 var curMonth = -1;
                 var curDate = -1;
+                var arrReportWeek = new Array();
+                var curWeek;
 
                 for (var i = 0; i < len; i++)
                 {
                     var date = getDateFromDB(results.rows.item(i).date);
                     var month = results.rows.item(i).month;
+                    var week = results.rows.item(i).week;
 
-                    if (i > 0 && curMonth != month)
+                    if (i > 0 && curWeek !== week)
                     {
-                        newItems.push(calculate(getDateRangeOfMonth(curDate == -1 ? date : curDate), totalHours, totalMealVoucher));
-
-                        // Ready for the next week
+                        arrReportWeek.push(calculate('', totalHours, totalMealVoucher));
                         totalHours = 0;
                         totalMealVoucher = 0;
+                    }
+
+                    if (i > 0 && curMonth !== month)
+                    {
+                        var report = new Array();
+                        report.date = getDateRangeOfMonth(curDate === -1 ? date : curDate);
+                        report.totalHours = 0;
+                        report.totalHoursLvl2 = 0;
+                        report.totalHoursLvl3 = 0;
+                        report.totalMealVoucher = 0;
+                        for (var j = 0; j < arrReportWeek.length; j++)
+                        {
+                            report.totalHours += arrReportWeek[j].totalHours;
+                            report.totalHoursLvl2 += arrReportWeek[j].totalHoursLvl2;
+                            report.totalHoursLvl3 += arrReportWeek[j].totalHoursLvl3;
+                            report.totalMealVoucher += arrReportWeek[j].totalMealVoucher;
+                        }
+
+                        newItems.push(formatReport(report));
+
+                        // Ready for the next month
+                        totalHours = 0;
+                        totalMealVoucher = 0;
+                        arrReportWeek = [];
                     }
 
                     var beginAM = results.rows.item(i).beginAM;
@@ -108,11 +247,28 @@ function ReportCtrl($scope)
                     totalHours += timeDiff(beginPM, endPM, true);
 
                     curMonth = month;
+                    curWeek = week;
                     curDate = Date.parseExact(date, "yyyy-MM-dd");
 
                     if (i == len-1)
                     {
-                        newItems.push(calculate(getDateRangeOfMonth(curDate), totalHours, totalMealVoucher));
+                        arrReportWeek.push(calculate('', totalHours, totalMealVoucher));
+
+                        var report = new Array();
+                        report.date = getDateRangeOfMonth(curDate);
+                        report.totalHours = 0;
+                        report.totalHoursLvl2 = 0;
+                        report.totalHoursLvl3 = 0;
+                        report.totalMealVoucher = 0;
+                        for (var j = 0; j < arrReportWeek.length; j++)
+                        {
+                            report.totalHours += arrReportWeek[j].totalHours;
+                            report.totalHoursLvl2 += arrReportWeek[j].totalHoursLvl2;
+                            report.totalHoursLvl3 += arrReportWeek[j].totalHoursLvl3;
+                            report.totalMealVoucher += arrReportWeek[j].totalMealVoucher;
+                        }
+
+                        newItems.push(formatReport(report));
                     }
                 }
 
@@ -161,7 +317,7 @@ function ReportCtrl($scope)
                     totalHours += timeDiff(beginPM, endPM, true);
                 }
 
-                $scope.reportsWeekly = calculate('', totalHours, totalMealVoucher);
+                $scope.reportsWeekly = formatReport(calculate('', totalHours, totalMealVoucher));
             });
         });
 
@@ -173,6 +329,8 @@ function ReportCtrl($scope)
                 var len = results.rows.length;
                 var totalHours = 0;
                 var totalMealVoucher = 0;
+                var arrReportWeek = new Array();
+                var curWeek;
 
                 for (var i = 0; i < len; i++)
                 {
@@ -180,6 +338,14 @@ function ReportCtrl($scope)
                     var endAM = results.rows.item(i).endAM;
                     var beginPM = results.rows.item(i).beginPM;
                     var endPM = results.rows.item(i).endPM;
+                    var week = results.rows.item(i).week;
+
+                    if (i > 0 && curWeek !== week)
+                    {
+                        arrReportWeek.push(calculate('', totalHours, totalMealVoucher));
+                        totalHours = 0;
+                        totalMealVoucher = 0;
+                    }
 
                     if (timeDiff(endAM, beginAM, true) !== 0 && timeDiff(endPM, beginPM, true) !== 0 && timeDiff(endAM, beginPM, true) < prefMealVoucher)
                     {
@@ -188,9 +354,29 @@ function ReportCtrl($scope)
 
                     totalHours += timeDiff(beginAM, endAM, true);
                     totalHours += timeDiff(beginPM, endPM, true);
+
+                    curWeek = week;
+
+                    if (i == len-1)
+                    {
+                        arrReportWeek.push(calculate('', totalHours, totalMealVoucher));
+                    }
                 }
 
-                $scope.reportsMonthly = calculate('', totalHours, totalMealVoucher);
+                var report = new Array();
+                report.totalHours = 0;
+                report.totalHoursLvl2 = 0;
+                report.totalHoursLvl3 = 0;
+                report.totalMealVoucher = 0;
+                for (var i = 0; i < arrReportWeek.length; i++)
+                {
+                    report.totalHours += arrReportWeek[i].totalHours;
+                    report.totalHoursLvl2 += arrReportWeek[i].totalHoursLvl2;
+                    report.totalHoursLvl3 += arrReportWeek[i].totalHoursLvl3;
+                    report.totalMealVoucher += arrReportWeek[i].totalMealVoucher;
+                }
+
+                $scope.reportsMonthly = formatReport(report);
                 $scope.$digest();
             });
         });
@@ -232,6 +418,17 @@ function getDateRangeOfMonth(date)
     return lib;
 }
 
+function formatReport(report)
+{
+    return {
+        date:report.date,
+        totalHours:formatTime(report.totalHours),
+        totalHoursLvl2:formatTime(report.totalHoursLvl2),
+        totalHoursLvl3:formatTime(report.totalHoursLvl3),
+        totalMealVoucher:report.totalMealVoucher
+    };
+}
+
 function calculate(dateRange, totalHours, totalMealVoucher)
 {
     var levelSplit = prefExtraHoursPolicy.split('|');
@@ -240,26 +437,30 @@ function calculate(dateRange, totalHours, totalMealVoucher)
     var level3 = levelSplit[2];
 
     var level2Split = level2.split(';');
-    var lvl2Hours = level2Split[1].split('-')[0];
-    var lvl3Hours = level2Split[1].split('-')[1];
-
-    var totalHoursLvl3 = 0;
-    if (totalHours > lvl3Hours * 60)
-    {
-        totalHoursLvl3 = totalHours - lvl3Hours * 60;
-    }
+    var lvl2Hours = level2Split[1].split('-')[0] * 60;
+    var lvl3Hours = level2Split[1].split('-')[1] * 60;
 
     var totalHoursLvl2 = 0;
-    if (totalHours > lvl2Hours * 60)
+    if (totalHours > lvl2Hours)
     {
-        totalHoursLvl2 = totalHours - lvl2Hours * 60 - totalHoursLvl3;
+        totalHoursLvl2 = totalHours - lvl2Hours;
+        if (totalHoursLvl2 >= (lvl3Hours - lvl2Hours))
+        {
+            totalHoursLvl2 = lvl3Hours - lvl2Hours;
+        }
+    }
+
+    var totalHoursLvl3 = 0;
+    if (totalHours > lvl3Hours)
+    {
+        totalHoursLvl3 = totalHours - lvl3Hours;
     }
 
     return {
         date:dateRange,
-        totalHours:formatTime(totalHours),
-        totalHoursLvl2:formatTime(totalHoursLvl2),
-        totalHoursLvl3:formatTime(totalHoursLvl3),
+        totalHours:totalHours,
+        totalHoursLvl2:totalHoursLvl2,
+        totalHoursLvl3:totalHoursLvl3,
         totalMealVoucher:totalMealVoucher
     };
 }

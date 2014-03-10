@@ -46,10 +46,12 @@
         "calendar.editafternoon.worked"  : "Travaillé?",
 
         // Report
-        "report.weekly"  : "Hebdomadaire",
+        "report.weekly"  : "Hebdo.",
         "report.monthly"  : "Mensuel",
+        "report.custom"  : "Perso.",
         "report.thisweek"  : "Cette semaine",
         "report.thismonth"  : "Ce mois",
+        "report.btnReportCustom"  : "Calculer",
 
 		// Settings
         "settings.mealvoucher"  : "Panier",

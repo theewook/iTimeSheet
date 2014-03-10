@@ -138,9 +138,9 @@
                         var lunchBreak = timeDiff(event[plugin.settings.endAM], event[plugin.settings.beginPM], true);
                         dailyHoursWorkedMealVoucher = (totalHoursAM !== "00:00" && totalHoursPM !== "00:00" && lunchBreak < plugin.settings.prefMealVoucher) ? "<span>&bull;</span>" : "<span></span>";
 
-                        if (totalHoursSplit[0] >= 9) {
+                        if (totalHoursSplit[0] >= 10) {
                             importance = 3;
-                        } else if (totalHoursSplit[0] >= 8 && totalHoursSplit[0] < 9 && totalHoursSplit[1] > 0) {
+                        } else if (totalHoursSplit[0] >= 8 && totalHoursSplit[0] < 10 && totalHoursSplit[1] > 0) {
                             importance = 2;
                         } else {
                             importance = 1;
