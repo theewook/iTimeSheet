@@ -4,7 +4,7 @@
 
         // Title
         "main.calendar"  : "Calendrier",
-        "main.calendar.addshift"  : "Ajouter ...",
+        "main.calendar.addshift"  : "Ajouter",
         "main.calendar.editshift"  : "Date",
         "main.calendar.editmorning"  : "Matin",
         "main.calendar.editafternoon"  : "Aprés-midi",
@@ -52,6 +52,8 @@
         "report.thisweek"  : "Cette semaine",
         "report.thismonth"  : "Ce mois",
         "report.btnReportCustom"  : "Calculer",
+        "report.from"  : "De",
+        "report.to"  : "À",
 
 		// Settings
         "settings.mealvoucher"  : "Panier",

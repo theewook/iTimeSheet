@@ -237,6 +237,7 @@ function displayCalendar()
         days: days,
         startOfWeek: 1,
         prefMealVoucher: prefMealVoucher,
+        prefHourlyRate: prefHourlyRate,
         index: this
     });
 }
@@ -321,6 +322,8 @@ function doTranslation()
     $('#lblViewReportThisWeek').text($.i18n._('report.thisweek'));
     $('#lblViewReportThisMonth').text($.i18n._('report.thismonth'));
     $('#lblBtnReportCustom').text($.i18n._('report.btnReportCustom'));
+    $('#lblViewReportCustomFrom').text($.i18n._('report.from'));
+    $('#lblViewReportCustomTo').text($.i18n._('report.to'));
 
     // Settings View
     $('#lblViewSettingsTitle').text($.i18n._('main.settings'));

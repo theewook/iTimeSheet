@@ -36,8 +36,7 @@
 <!-- CALENDAR -->
 <!-- !!!!!!!!!!!!!!!!!!!!!!!! -->
 <div data-role="page" id="viewCalendar">
-
-    <div data-role="header">
+    <div data-role="header" data-theme="b">
         <a href="#" id="actionToday" data-role="button">
             <div id="lblViewCalendarToday">Today</div>
         </a>
@@ -55,7 +54,7 @@
         <div id="calendar"></div>
     </div>
 
-    <div data-role="footer" data-position="fixed">
+    <div data-role="footer" data-position="fixed" data-theme="b">
         <div class="myNavBar" data-role="navbar" data-iconpos="top">
             <ul class="">
                 <li><a href="#viewCalendar" data-transition="none" data-icon="custom-calendar"
@@ -83,7 +82,7 @@
 <!-- ADD SHIFT -->
 <!-- !!!!!!!!!!!!!!!!!!!!!!!! -->
 <div data-role="page" id="viewAddShift">
-    <div data-role="header" data-position="fixed" data-theme="a">
+    <div data-role="header" data-position="fixed" data-theme="b">
         <a href="#viewCalendar" data-transition="slidedown" data-role="button"><span id="lblViewAddShiftCancel">Cancel</span></a>
 
         <h1 id="lblViewAddShiftTitle">Add shift</h1>
@@ -93,7 +92,7 @@
     <div data-role="content" class="content">
         <ul data-role="listview" data-inset="true">
             <li data-icon="nf-arrow-r" id="actionEditDateShift"><a href="#viewEditDateShift" data-transition="slide"><span id="lblViewAddShiftDate">Date</span>
-                <div id="lblDateShift" style="float:right;font-weight:normal;color:blue;"></div>
+                <div id="lblDateShift" style="float:right;font-weight:normal;color:#2373a5;"></div>
             </a></li>
         </ul>
 
@@ -101,8 +100,8 @@
         <ul data-role="listview" data-inset="true" style="margin-top:5px;">
             <li data-icon="nf-arrow-r"><a href="#viewEditMorningShift" data-transition="slide"
                                           id="actionEditMorningShift">
-                <div><span id="lblViewAddShiftAMStarts">Starts</span> <span id="lblBeginAMShift" style="float:right;font-weight:normal;color:blue;"></span></div>
-                <div><span id="lblViewAddShiftAMEnds">Ends</span> <span id="lblEndAMShift" style="float:right;font-weight:normal;color:blue;"></span></div>
+                <div><span id="lblViewAddShiftAMStarts">Starts</span> <span id="lblBeginAMShift" style="float:right;font-weight:normal;color:#2373a5;"></span></div>
+                <div><span id="lblViewAddShiftAMEnds">Ends</span> <span id="lblEndAMShift" style="float:right;font-weight:normal;color:#2373a5;"></span></div>
             </a></li>
         </ul>
 
@@ -110,15 +109,15 @@
         <ul data-role="listview" data-inset="true" style="margin-top:5px;">
             <li data-icon="nf-arrow-r"><a href="#viewEditAfternoonShift" data-transition="slide"
                                           id="actionEditAfternoonShift">
-                <div><span id="lblViewAddShiftPMStarts">Starts</span> <span id="lblBeginPMShift" style="float:right;font-weight:normal;color:blue;"></span></div>
-                <div><span id="lblViewAddShiftPMEnds">Ends</span> <span id="lblEndPMShift" style="float:right;font-weight:normal;color:blue;"></span></div>
+                <div><span id="lblViewAddShiftPMStarts">Starts</span> <span id="lblBeginPMShift" style="float:right;font-weight:normal;color:#2373a5;"></span></div>
+                <div><span id="lblViewAddShiftPMEnds">Ends</span> <span id="lblEndPMShift" style="float:right;font-weight:normal;color:#2373a5;"></span></div>
             </a></li>
         </ul>
     </div>
 </div>
 
 <div data-role="page" id="viewEditDateShift">
-    <div data-role="header" data-position="fixed" data-theme="a">
+    <div data-role="header" data-position="fixed" data-theme="b">
         <a href="#viewAddShift" data-direction="reverse" data-transition="slide" data-role="button"><span id="lblViewEditShiftCancel">Cancel</span></a>
 
         <h1 id="lblViewEditShiftTitle">Date</h1>
@@ -129,7 +128,7 @@
     <div data-role="content" class="content">
         <ul data-role="listview" data-inset="true">
             <li id="itemEditDateShift"><span id="lblViewEditShiftDate">Date</span>
-                <div id="lblEditDateShift" style="float:right;font-weight:normal;color:blue;"></div>
+                <div id="lblEditDateShift" style="float:right;font-weight:normal;color:#2373a5;"></div>
             </li>
         </ul>
     </div>
@@ -142,7 +141,7 @@
 </div>
 
 <div data-role="page" id="viewEditMorningShift">
-    <div data-role="header" data-position="fixed" data-theme="a">
+    <div data-role="header" data-position="fixed" data-theme="b">
         <a href="#viewAddShift" data-direction="reverse" data-transition="slide" data-role="button"><span id="lblViewEditMorningCancel">Cancel</span></a>
 
         <h1 id="lblViewEditMorningTitle">Morning</h1>
@@ -153,10 +152,10 @@
     <div data-role="content" class="content">
         <ul data-role="listview" data-inset="true">
             <li id="itemEditBeginAMShift"><span id="lblViewEditMorningStarts">Starts</span>
-                <div id="lblEditBeginAMShift" style="float:right;font-weight:normal;color:blue;"></div>
+                <div id="lblEditBeginAMShift" style="float:right;font-weight:normal;color:#2373a5;"></div>
             </li>
             <li id="itemEditEndAMShift"><span id="lblViewEditMorningEnds">Ends</span>
-                <div id="lblEditEndAMShift" style="float:right;font-weight:normal;color:blue;"></div>
+                <div id="lblEditEndAMShift" style="float:right;font-weight:normal;color:#2373a5;"></div>
             </li>
         </ul>
         <div style="text-align:center">
@@ -177,7 +176,7 @@
 </div>
 
 <div data-role="page" id="viewEditAfternoonShift">
-    <div data-role="header" data-position="fixed" data-theme="a">
+    <div data-role="header" data-position="fixed" data-theme="b">
         <a href="#viewAddShift" data-direction="reverse" data-transition="slide" data-role="button"><span id="lblViewEditAfternoonCancel">Cancel</span></a>
 
         <h1 id="lblViewEditAfternoonTitle">Afternoon</h1>
@@ -188,10 +187,10 @@
     <div data-role="content" class="content">
         <ul data-role="listview" data-inset="true">
             <li id="itemEditBeginPMShift"><span id="lblViewEditAfternoonStarts">Starts</span>
-                <div id="lblEditBeginPMShift" style="float:right;font-weight:normal;color:blue;"></div>
+                <div id="lblEditBeginPMShift" style="float:right;font-weight:normal;color:#2373a5;"></div>
             </li>
             <li id="itemEditEndPMShift"><span id="lblViewEditAfternoonEnds">Ends</span>
-                <div id="lblEditEndPMShift" style="float:right;font-weight:normal;color:blue;"></div>
+                <div id="lblEditEndPMShift" style="float:right;font-weight:normal;color:#2373a5;"></div>
             </li>
         </ul>
         <div style="text-align:center">
@@ -218,7 +217,7 @@
 <!-- REPORT -->
 <!-- !!!!!!!!!!!!!!!!!!!!!!!! -->
 <div data-role="page" id="viewReport" ng-controller="ReportCtrl">
-    <div data-role="header" data-position="fixed" data-theme="a">
+    <div data-role="header" data-position="fixed" data-theme="b">
         <h1>
             <div id="lblViewReportTitle">Reports</div>
         </h1>
@@ -235,14 +234,13 @@
 
     <div data-role="content" class="content">
         <div id="viewReportDetail">
-            <ul id="reportListview" data-role="listview" data-theme="d" data-divider-theme="d" class="ui-listview">
+            <ul id="reportListview" data-role="listview" class="ui-listview">
                 <div ng-repeat="report in reports">
                     <li data-role="list-divider" role="heading" class="ui-li ui-li-divider ui-bar-d ui-li-has-count">
                         {{report.date}}
                     </li>
                     <li data-corners="false" data-shadow="false" data-iconshadow="true" data-wrapperels="div"
-                        data-iconpos="right" data-theme="d"
-                        class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-d">
+                        data-iconpos="right" class="ui-btn ui-btn-icon-right ui-li-has-arrow ui-li ui-btn-up-d">
                         <report-detail report="report"/>
                     </li>
                 </div>
@@ -252,22 +250,22 @@
         <div id="viewReportCustom">
             <div data-role="fieldcontain">
                 <fieldset data-role="controlgroup" data-type="horizontal" style="text-align: center;">
-                    <legend>From:</legend>
-                    <select name="report-select-year-from" id="report-select-year-from" ng-model="selectedYearFrom" ng-options="val for val in getYears()">
+                    <div class="text" id="lblViewReportCustomFrom">From</div>
+                    <select name="report-select-year-from" id="report-select-year-from" data-mini="true" ng-model="selectedYearFrom" ng-options="val for val in getYears()">
                     </select>
-                    <select name="report-select-week-from" id="report-select-week-from" ng-model="selectedWeekFrom" ng-options="val for val in getWeeksFirstDay()">
-                    </select>
-                </fieldset>
-                <!--<br />-->
-                <fieldset data-role="controlgroup" data-type="horizontal" style="text-align: center;">
-                    <legend>To:</legend>
-                    <select name="report-select-year-to" id="report-select-year-to" ng-model="selectedYearTo" ng-options="val for val in getYears()">
-                    </select>
-                    <select name="report-select-week-to" id="report-select-week-to" ng-model="selectedWeekTo" ng-options="val for val in getWeeksLastDay()">
+                    <select name="report-select-week-from" id="report-select-week-from" data-mini="true" ng-model="selectedWeekFrom" ng-options="val for val in getWeeksFirstDay()">
                     </select>
                 </fieldset>
                 <br />
-                <div align="center"><a href="#" ng-click="getReportCustom();" data-role="button" data-inline="true" data-theme="b"><span id="lblBtnReportCustom">Calculate</span></a></div>
+                <fieldset data-role="controlgroup" data-type="horizontal" style="text-align: center;">
+                    <div class="text" id="lblViewReportCustomTo">To</div>
+                    <select name="report-select-year-to" id="report-select-year-to" data-mini="true" ng-model="selectedYearTo" ng-options="val for val in getYears()">
+                    </select>
+                    <select name="report-select-week-to" id="report-select-week-to" data-mini="true" ng-model="selectedWeekTo" ng-options="val for val in getWeeksLastDay()">
+                    </select>
+                </fieldset>
+                <br />
+                <div align="center"><a href="#" ng-click="getReportCustom();" data-mini="true" data-role="button" data-inline="true" data-theme="b"><span id="lblBtnReportCustom">Calculate</span></a></div>
             </div>
 
             <div style="margin-top:20px;">
@@ -300,7 +298,7 @@
         </div>
     </div>
 
-    <div data-role="footer" data-position="fixed">
+    <div data-role="footer" data-position="fixed" data-theme="b">
         <div class="myNavBar" data-role="navbar" data-iconpos="top">
             <ul class="">
                 <li><a href="#viewCalendar" class="custom-calendar" data-transition="none" data-icon="custom-calendar">
@@ -327,7 +325,7 @@
 <!-- SETTING -->
 <!-- !!!!!!!!!!!!!!!!!!!!!!!! -->
 <div data-role="page" id="viewSettings">
-    <div data-role="header" data-position="fixed" data-theme="a">
+    <div data-role="header" data-position="fixed" data-theme="b">
         <h1 id="lblViewSettingsTitle">Settings</h1>
     </div>
 
@@ -336,7 +334,7 @@
             <li data-icon="nf-arrow-r"><a href="#viewMealVoucher" data-transition="slide"
                                           id="actionSettingsEditMealVoucher"><span id="lblViewSettingsMealVoucher">Meal Voucher</span>
 
-                <div id="lblSettingsMealVoucher" style="float:right;font-weight:normal;color:blue;"></div>
+                <div id="lblSettingsMealVoucher" style="float:right;font-weight:normal;color:#2373a5;"></div>
             </a></li>
             <li data-icon="false" id="actionSettingsEditHourlyRate"><a href="#">
                 <div style="overflow:hidden;">
@@ -350,7 +348,7 @@
                 </div>
             </a></li>
             <li data-icon="nf-arrow-r"><a href="#viewDevise" data-transition="slide" id="actionSettingsEditDevise"><span id="lblViewSettingsDevise">Devise</span>
-                <div id="lblSettingsDevise" style="float:right;font-weight:normal;color:blue;"></div>
+                <div id="lblSettingsDevise" style="float:right;font-weight:normal;color:#2373a5;"></div>
             </a></li>
             <li data-icon="nf-arrow-r"><a href="#viewExtraHoursPolicy" data-transition="slide"
                                           id="actionSettingsEditExtraHoursPolicy"><span id="lblViewSettingsExtraHoursPolicy">Extra Hours Policy</span></a></li>
@@ -358,17 +356,17 @@
         <ul data-role="listview" data-inset="true">
             <li data-icon="nf-arrow-r"><a href="#viewLanguage" data-transition="slide"
                                           id="actionSettingsEditLanguage"><span id="lblViewSettingsLanguage">Language</span>
-                <div id="lblSettingsLanguage" style="float:right;font-weight:normal;color:blue;"></div>
+                <div id="lblSettingsLanguage" style="float:right;font-weight:normal;color:#2373a5;"></div>
             </a></li>
         </ul>
         <ul data-role="listview" data-inset="true">
             <li data-icon="false"><a href="#"><span id="lblViewSettingsVersion">Version</span>
-                <div style="float:right;font-weight:normal;color:blue;">1.4</div>
+                <div style="float:right;font-weight:normal;color:#2373a5;">1.5</div>
             </a></li>
         </ul>
     </div>
 
-    <div data-role="footer" data-position="fixed">
+    <div data-role="footer" data-position="fixed" data-theme="b">
         <div class="myNavBar" data-role="navbar" data-iconpos="top">
             <ul class="">
                 <li><a href="#viewCalendar" class="custom-calendar" data-transition="none" data-icon="custom-calendar">
@@ -390,7 +388,7 @@
 </div>
 
 <div data-role="page" id="viewLanguage">
-    <div data-role="header" data-position="fixed" data-theme="a">
+    <div data-role="header" data-position="fixed" data-theme="b">
         <a href="#viewSettings" data-direction="reverse" data-transition="slide" data-role="button">Back</a>
 
         <h1 id="lblViewLanguageTitle">Language</h1>
@@ -409,7 +407,7 @@
 </div>
 
 <div data-role="page" id="viewMealVoucher">
-    <div data-role="header" data-position="fixed" data-theme="a">
+    <div data-role="header" data-position="fixed" data-theme="b">
         <a href="#viewSettings" data-direction="reverse" data-transition="slide" data-role="button">Back</a>
 
         <h1 id="lblViewMealVoucherTitle">Meal Voucher</h1>
@@ -432,7 +430,7 @@
 </div>
 
 <div data-role="page" id="viewDevise">
-    <div data-role="header" data-position="fixed" data-theme="a">
+    <div data-role="header" data-position="fixed" data-theme="b">
         <a href="#viewSettings" data-direction="reverse" data-transition="slide" data-role="button">Back</a>
 
         <h1 id="lblViewDeviseTitle">Devise</h1>
@@ -455,7 +453,7 @@
 </div>
 
 <div data-role="page" id="viewExtraHoursPolicy">
-    <div data-role="header" data-position="fixed" data-theme="a">
+    <div data-role="header" data-position="fixed" data-theme="b">
         <a href="#viewSettings" id="backExtraHoursPolicy" data-direction="reverse" data-transition="slide"
            data-role="button">Back</a>
 
@@ -465,18 +463,18 @@
     <div data-role="content" class="content">
         <div data-role="fieldcontain">
             <div data-role="fieldcontain">
-                <label for="selectLevel1"><span id="lblViewExtraHoursPolicyLevel1">Level 1</span></label>
+                <label for="selectLevel1"><span class="text" id="lblViewExtraHoursPolicyLevel1">Level 1</span></label>
                 <select name="selectLevel1" id="selectLevel1" data-mini="true">
                     <option value="100">100%</option>
                 </select>
             </div>
         </div>
         <div data-role="fieldcontain">
-            <label for="selectLevel2"><span id="lblViewExtraHoursPolicyLevel2">Level 2</span></label>
+            <label for="selectLevel2"><span class="text" id="lblViewExtraHoursPolicyLevel2">Level 2</span></label>
 
             <div data-role="rangeslider" data-mini="true">
-                <input type="range" name="rangeMinLevel2" id="rangeMinLevel2" min="35" max="50">
-                <input type="range" name="rangeMaxLevel2" id="rangeMaxLevel2" min="35" max="50">
+                <input type="range" name="rangeMinLevel2" id="rangeMinLevel2" style="color: #2373a5" min="35" max="50">
+                <input type="range" name="rangeMaxLevel2" id="rangeMaxLevel2" style="color: #2373a5" min="35" max="50">
             </div>
             <div data-role="fieldcontain">
                 <select name="selectLevel2" id="selectLevel2" data-mini="true">
@@ -490,7 +488,7 @@
         </div>
         <div data-role="fieldcontain">
             <div data-role="fieldcontain">
-                <label for="selectLevel3"><span id="lblViewExtraHoursPolicyLevel3">Level 3</span></label>
+                <label for="selectLevel3"><span class="text" id="lblViewExtraHoursPolicyLevel3">Level 3</span></label>
                 <select name="selectLevel3" id="selectLevel3" data-mini="true">
                     <option value="100">100%</option>
                     <option value="125">125%</option>

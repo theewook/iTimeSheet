@@ -66,12 +66,14 @@ function ReportCtrl($scope)
                 report.totalHoursLvl2 = 0;
                 report.totalHoursLvl3 = 0;
                 report.totalMealVoucher = 0;
+                report.wage = 0;
                 for (var i = 0; i < arrReportWeek.length; i++)
                 {
                     report.totalHours += arrReportWeek[i].totalHours;
                     report.totalHoursLvl2 += arrReportWeek[i].totalHoursLvl2;
                     report.totalHoursLvl3 += arrReportWeek[i].totalHoursLvl3;
                     report.totalMealVoucher += arrReportWeek[i].totalMealVoucher;
+                    report.wage += arrReportWeek[i].wage;
                 }
 
                 $scope.reportCustom = formatReport(report);
@@ -217,12 +219,14 @@ function ReportCtrl($scope)
                         report.totalHoursLvl2 = 0;
                         report.totalHoursLvl3 = 0;
                         report.totalMealVoucher = 0;
+                        report.wage = 0;
                         for (var j = 0; j < arrReportWeek.length; j++)
                         {
                             report.totalHours += arrReportWeek[j].totalHours;
                             report.totalHoursLvl2 += arrReportWeek[j].totalHoursLvl2;
                             report.totalHoursLvl3 += arrReportWeek[j].totalHoursLvl3;
                             report.totalMealVoucher += arrReportWeek[j].totalMealVoucher;
+                            report.wage += arrReportWeek[j].wage;
                         }
 
                         newItems.push(formatReport(report));
@@ -260,12 +264,14 @@ function ReportCtrl($scope)
                         report.totalHoursLvl2 = 0;
                         report.totalHoursLvl3 = 0;
                         report.totalMealVoucher = 0;
+                        report.wage = 0;
                         for (var j = 0; j < arrReportWeek.length; j++)
                         {
                             report.totalHours += arrReportWeek[j].totalHours;
                             report.totalHoursLvl2 += arrReportWeek[j].totalHoursLvl2;
                             report.totalHoursLvl3 += arrReportWeek[j].totalHoursLvl3;
                             report.totalMealVoucher += arrReportWeek[j].totalMealVoucher;
+                            report.wage += arrReportWeek[j].wage;
                         }
 
                         newItems.push(formatReport(report));
@@ -368,12 +374,14 @@ function ReportCtrl($scope)
                 report.totalHoursLvl2 = 0;
                 report.totalHoursLvl3 = 0;
                 report.totalMealVoucher = 0;
+                report.wage = 0;
                 for (var i = 0; i < arrReportWeek.length; i++)
                 {
                     report.totalHours += arrReportWeek[i].totalHours;
                     report.totalHoursLvl2 += arrReportWeek[i].totalHoursLvl2;
                     report.totalHoursLvl3 += arrReportWeek[i].totalHoursLvl3;
                     report.totalMealVoucher += arrReportWeek[i].totalMealVoucher;
+                    report.wage += arrReportWeek[i].wage;
                 }
 
                 $scope.reportsMonthly = formatReport(report);
@@ -425,18 +433,20 @@ function formatReport(report)
         totalHours:formatTime(report.totalHours),
         totalHoursLvl2:formatTime(report.totalHoursLvl2),
         totalHoursLvl3:formatTime(report.totalHoursLvl3),
-        totalMealVoucher:report.totalMealVoucher
+        totalMealVoucher:report.totalMealVoucher,
+        wage:parseFloat(report.wage).toFixed(2)
     };
 }
 
 function calculate(dateRange, totalHours, totalMealVoucher)
 {
     var levelSplit = prefExtraHoursPolicy.split('|');
-    var level1 = levelSplit[0];
+    var level1Pourcent = levelSplit[0];
     var level2 = levelSplit[1];
-    var level3 = levelSplit[2];
+    var level3Pourcent = levelSplit[2];
 
     var level2Split = level2.split(';');
+    var level2Pourcent = level2Split[0];
     var lvl2Hours = level2Split[1].split('-')[0] * 60;
     var lvl3Hours = level2Split[1].split('-')[1] * 60;
 
@@ -456,12 +466,19 @@ function calculate(dateRange, totalHours, totalMealVoucher)
         totalHoursLvl3 = totalHours - lvl3Hours;
     }
 
+    // Wage
+    var wageLevel1 = ((level1Pourcent / 100) * (prefHourlyRate / 60)) * (totalHours - totalHoursLvl2 - totalHoursLvl3);
+    var wageLevel2 = ((level2Pourcent / 100) * (prefHourlyRate / 60)) * totalHoursLvl2;
+    var wageLevel3 = ((level3Pourcent / 100) * (prefHourlyRate / 60)) * totalHoursLvl3;
+    var wage = wageLevel1 + wageLevel2 + wageLevel3;
+
     return {
         date:dateRange,
         totalHours:totalHours,
         totalHoursLvl2:totalHoursLvl2,
         totalHoursLvl3:totalHoursLvl3,
-        totalMealVoucher:totalMealVoucher
+        totalMealVoucher:totalMealVoucher,
+        wage:wage
     };
 }
 

@@ -52,6 +52,8 @@
         "report.thisweek"  : "This week",
         "report.thismonth"  : "This month",
         "report.btnReportCustom"  : "Calculate",
+        "report.from"  : "From",
+        "report.to"  : "To",
 
         // Settings
         "settings.mealvoucher"  : "Meal Voucher",
@@ -60,7 +62,6 @@
         "settings.extrahourspolicy"  : "Extra Hours Policy",
         "settings.language"  : "Language",
         "settings.version"  : "Version",
-
 
 		"settings.language.en" : "English",
 		"settings.language.fr" : "French",

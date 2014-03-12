@@ -51,6 +51,7 @@
     margin-right: 0px !important; /* If you want to fix right as well */
     margin-left: -5px !important; /* If you want to fix right as well */
     width: 100px !important;
+    color:#2373a5;
 }
 
 /* remove rounded corners */
@@ -131,7 +132,7 @@ a[data-icon="nf-plus"] .ui-btn-inner {
     text-align: left;
     font-size: 12px;
     font-weight: bold;
-    color: #858585;
+    color: #00415e;
 }
 
 li[data-swipeurl] .aSwipeBtn {
@@ -168,7 +169,10 @@ li[data-swipeurl] .aSwipeBtn .ui-btn-corner-all {
     border-radius: .5em;
 }
 
-
+.ui-btn-active {
+    background: none !important;
+    background-color: #31b6e7 !important;
+}
 
 
   

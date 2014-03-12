@@ -265,6 +265,12 @@
             }
         }
 
+        function calculateDailyWage(totalMinute)
+        {
+            var ratePerMinute = plugin.settings.prefHourlyRate / 60;
+            return parseFloat(totalMinute * ratePerMinute).toFixed(2);
+        }
+
         $element.bind('change', function (event, begin) {
             var end = new Date(begin.getFullYear(), begin.getMonth(), begin.getDate() + 1, 0, 0, 0, 0);
             // Empty the list
@@ -280,10 +286,13 @@
                     var dailyHoursWorkedAM = "<img src='img/chrono.png' width='22' height='22'/><span>" + (totalHoursAM === "00:00" ? "" : events[plugin.settings.beginAM] + " - " + events[plugin.settings.endAM]) + "</span>";
                     var dailyHoursWorkedPM = "<img src='img/chrono.png' width='22' height='22'/><span>" + (totalHoursPM === "00:00" ? "" : (events[plugin.settings.beginPM] + " - " + events[plugin.settings.endPM])) + "</span>";
 
-                    var lunchBreak = timeDiff(events[plugin.settings.endAM], events[plugin.settings.beginPM], true);
-                    var dailyHoursWorkedMealVoucher = (totalHoursAM !== "00:00" && totalHoursPM !== "00:00" && lunchBreak < plugin.settings.prefMealVoucher) ? "<div class='singleton'><img src='img/burger.png' width='32' height='32' /></div>" : "";
+                    var totalMinute = timeDiff(events[plugin.settings.beginAM], events[plugin.settings.endAM], true) + timeDiff(events[plugin.settings.beginPM], events[plugin.settings.endPM], true);
+                    var dailyWage = calculateDailyWage(totalMinute);
 
-                    var dailyHoursWorked = "<div class='detailTimeSheet'><div style='float:left;'>" +
+                    var lunchBreak = timeDiff(events[plugin.settings.endAM], events[plugin.settings.beginPM], true);
+                    var dailyHoursWorkedMealVoucher = (totalHoursAM !== "00:00" && totalHoursPM !== "00:00" && lunchBreak < plugin.settings.prefMealVoucher) ? "<div class='center'><img src='img/burger.png' width='32' height='32' />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + dailyWage + "<img src='img/money.png' width='32' height='32'/></div>" : "<div class='center'>" + dailyWage + "<img src='img/money.png' width='32' height='32'/></div>";
+
+                    var dailyHoursWorked = "<div class='detailTimeSheet'><div style='float:left;color:#000'>" +
                         dailyHoursWorkedAM + "<br/>" + dailyHoursWorkedPM +
                         "</div>" + dailyHoursWorkedMealVoucher + "<div class='singleton'>" + addDuration(totalHoursAM, totalHoursPM) + "</div></div>";
                     $("<li data-swipeurl='#' data-icon='false'><a href='#'>" + dailyHoursWorked + "</a></li>").appendTo($listview);
