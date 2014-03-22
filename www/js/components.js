@@ -11,9 +11,9 @@ angular.module('iTimeSheet', []).
                     '   <img src="img/chrono.png" width="22" height="22"/><span>{{report.totalHours}}</span>' +
                     '</div>' +
                     '<div class="left" style="color:#000">' +
-                    '   <img src="img/chrono.png" width="22" height="22"/><span>{{report.totalHoursLvl2}}</span>' +
+                    '   <img src="img/chronoA.png" width="22" height="22"/><span>{{report.totalHoursLvl2}}</span>' +
                     '   <br/>' +
-                    '   <img src="img/chrono.png" width="22" height="22"/><span>{{report.totalHoursLvl3}}</span>' +
+                    '   <img src="img/chronoR.png" width="22" height="22"/><span>{{report.totalHoursLvl3}}</span>' +
                     '</div>' +
                     '<div class="singleton">' +
                     '   <span>{{report.totalMealVoucher}}</span>' +
