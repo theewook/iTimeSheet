@@ -5,10 +5,12 @@ function ReportCtrl($scope)
     $scope.reportsMonthly = {};
     $scope.reportCustom = {};
 
-    $scope.selectedYearFrom = moment(new Date()).year();
-    $scope.selectedWeekFrom = new Date(moment(moment(new Date()).weeks() + " ," + $scope.selectedYearFrom, "W ,GGGG")).toString("dd MMMM yyyy");
-    $scope.selectedYearTo = moment(new Date()).year();
-    $scope.selectedWeekTo = new Date(moment(moment(new Date()).weeks() + " ," + $scope.selectedYearTo, "W ,GGGG").add('days', 6)).toString("dd MMMM yyyy");
+    $scope.selectedYearFrom = moment().year();
+    $scope.selectedWeekFrom = moment().year($scope.selectedYearFrom).weekday(0).format("DD MMMM YYYY");
+    $scope.selectedYearTo = moment().year();
+    $scope.selectedWeekTo = moment().year($scope.selectedYearTo).weekday(6).format("DD MMMM YYYY");
+
+    console.log($scope.selectedWeekFrom + " | " + $scope.selectedWeekTo);
 
     $scope.getReportCustom = function()
     {
@@ -16,13 +18,13 @@ function ReportCtrl($scope)
 
         var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
 
-        var startSearch = new Date(moment($scope.selectedWeekFrom));
-        var endSearch = new Date(moment($scope.selectedWeekTo));
+        var startSearch = moment($scope.selectedWeekFrom, "DD MMMM YYYY");
+        var endSearch = moment($scope.selectedWeekTo, "DD MMMM YYYY");
 
         db.transaction(function query(tx)
         {
             var sql = "SELECT * FROM EVENTS WHERE date BETWEEN ? AND ?";
-            tx.executeSql(sql, [getDateForSQL(startSearch.toString("yyyy-MM-dd")), getDateForSQL(endSearch.toString("yyyy-MM-dd"))], function querySuccess(tx, results)
+            tx.executeSql(sql, [getDateForSQL(startSearch.format("YYYY-MM-DD")), getDateForSQL(endSearch.format("YYYY-MM-DD"))], function querySuccess(tx, results)
             {
                 var len = results.rows.length;
                 var totalHours = 0;
@@ -293,15 +295,17 @@ function ReportCtrl($scope)
         var firstDayOfMonth = new Date(y, m, 1);
         var lastDayOfMonth = new Date(y, m + 1, 0);
 
-        var firstDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1)).clearTime();
-        var lastDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1 + 6)).clearTime();
+//        var firstDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1)).clearTime();
+//        var lastDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + 1 + 6)).clearTime();
+        var firstDayOfWeek = moment().weekday(0).hours(0).minutes(0).seconds(0);
+        var lastDayOfWeek = moment().weekday(6).hours(0).minutes(0).seconds(0);
 
         var db = window.openDatabase("timesheet", "1.0", "Timesheet DB", 10000000);
 
         db.transaction(function query(tx)
         {
             var sql = "SELECT * FROM EVENTS WHERE date BETWEEN ? AND ?";
-            tx.executeSql(sql, [getDateForSQL(firstDayOfWeek.toString("yyyy-MM-dd")), getDateForSQL(lastDayOfWeek.toString("yyyy-MM-dd"))], function querySuccess(tx, results)
+            tx.executeSql(sql, [getDateForSQL(firstDayOfWeek.format("YYYY-MM-DD")), getDateForSQL(lastDayOfWeek.format("YYYY-MM-DD"))], function querySuccess(tx, results)
             {
                 var len = results.rows.length;
                 var totalHours = 0;

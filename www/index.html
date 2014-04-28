@@ -261,7 +261,8 @@
                     <div class="text" id="lblViewReportCustomTo">To</div>
                     <select name="report-select-year-to" id="report-select-year-to" data-mini="true" ng-model="selectedYearTo" ng-options="val for val in getYears()">
                     </select>
-                    <select name="report-select-week-to" id="report-select-week-to" data-mini="true" ng-model="selectedWeekTo" ng-options="val for val in getWeeksLastDay()">
+                    <select name="report-select-week-to" id="report-select-week-to" data-mini="true" ng-model="selectedWeekTo">
+                        <option ng-repeat="val in getWeeksLastDay()" value="{{val)}}">{{val}}</option>
                     </select>
                 </fieldset>
                 <br />
