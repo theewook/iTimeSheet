@@ -1,6 +1,6 @@
 	var i18n_dict_fr = {
 
-        "main.title"  : "iTimeSheet",
+        "main.title"  : "Amblance",
 
         // Title
         "main.calendar"  : "Calendrier",
