@@ -16,7 +16,8 @@ function createDB(tx)
 //    tx.executeSql('DROP TABLE IF EXISTS EVENTS');
 //    tx.executeSql('DROP TABLE IF EXISTS PREFS');
 
-    tx.executeSql('CREATE TABLE IF NOT EXISTS EVENTS (id UNIQUE, date, week, month, beginAM, endAM, beginPM, endPM)');
+    tx.executeSql("CREATE TABLE IF NOT EXISTS EVENTS (id UNIQUE, date, week, month, beginAM, endAM, beginPM, endPM)");
+    tx.executeSql("DELETE FROM EVENTS where week = '' or week is NULL");
 
 //    tx.executeSql('INSERT INTO EVENTS (id, date, week, month, beginAM, endAM, beginPM, endPM) VALUES (20140231, "2014-02-31", 14, "02", "08:30", "12:30", "13:00", "18:30")');
 //    tx.executeSql('INSERT INTO EVENTS (id, date, week, month, beginAM, endAM, beginPM, endPM) VALUES (20140301, "2014-03-01", 14, "03", "08:30", "12:30", "13:00", "18:30")');
@@ -32,9 +33,6 @@ function createDB(tx)
 
 
 //    tx.executeSql('INSERT INTO EVENTS (id, beginAM, endAM, beginPM, endPM) VALUES (20140316, "08:00", "10:00", "14:00", "15:00")');
-
-
-
 
     tx.executeSql('CREATE TABLE IF NOT EXISTS PREFS (name UNIQUE, value)');
     // tx.executeSql('INSERT INTO PREFS (name, value) VALUES ("lang", "en")');

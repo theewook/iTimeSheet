@@ -261,8 +261,7 @@
                     <div class="text" id="lblViewReportCustomTo">To</div>
                     <select name="report-select-year-to" id="report-select-year-to" data-mini="true" ng-model="selectedYearTo" ng-options="val for val in getYears()">
                     </select>
-                    <select name="report-select-week-to" id="report-select-week-to" data-mini="true" ng-model="selectedWeekTo">
-                        <option ng-repeat="val in getWeeksLastDay()" value="{{val}}">{{val}}</option>
+                    <select name="report-select-week-to" id="report-select-week-to" data-mini="true" ng-model="selectedWeekTo" ng-options="val for val in getWeeksLastDay()">
                     </select>
                 </fieldset>
                 <br />
@@ -271,6 +270,7 @@
 
             <div style="margin-top:20px;">
                 <ul data-role="listview" data-inset="true" style="margin-top:5px;">
+
                     <li data-icon="nf-arrow-r">
                         <report-detail report="reportCustom"/>
                     </li>
@@ -362,7 +362,7 @@
         </ul>
         <ul data-role="listview" data-inset="true">
             <li data-icon="false"><a href="#"><span id="lblViewSettingsVersion">Version</span>
-                <div style="float:right;font-weight:normal;color:#2373a5;">1.7</div>
+                <div style="float:right;font-weight:normal;color:#2373a5;">1.8</div>
             </a></li>
         </ul>
     </div>

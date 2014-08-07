@@ -257,6 +257,7 @@ $(document).ready(function ()
     {
         var dateId = moment(dateShift, "DD MMMM YYYY").format("YYYYMMDD");
         //var dateId = Date.parse(dateShift).toString("yyyyMMdd");
+        console.log(dateShift);
         var dateIdYY = dateId.substr(0,4);
         var dateIdMM = dateId.substr(4,2);
         var dateIdDD = dateId.substr(6,2);

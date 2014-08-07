@@ -21,6 +21,8 @@ function ReportCtrl($scope)
         var startSearch = moment($scope.selectedWeekFrom, "DD MMMM YYYY");
         var endSearch = moment($scope.selectedWeekTo, "DD MMMM YYYY");
 
+        console.log("getReportCustom: " + startSearch.format("DD MMMM YYYY") + " | " + endSearch.format("DD MMMM YYYY"));
+
         db.transaction(function query(tx)
         {
             var sql = "SELECT * FROM EVENTS WHERE date BETWEEN ? AND ?";
